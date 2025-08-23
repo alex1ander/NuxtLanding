@@ -1,0 +1,92 @@
+@use 'sass:math';
+$animationTime: 2;
+
+.face-svg{
+    .eyes {
+        opacity: 0;
+        animation: fadeIn 2s forwards #{math.div($animationTime, 2)}s;
+    }
+
+    .line1 {
+        stroke-dasharray: 556.0283813476562;
+        stroke-dashoffset: 556.0283813476562;
+        animation: drawLine  #{$animationTime * 1.5}s ease-out forwards #{$animationTime}s;
+    }
+    .line2 {
+        stroke-dasharray: 701.8782348632812;
+        stroke-dashoffset: 701.8782348632812;
+        animation: drawLine #{$animationTime * 1.5}s ease-out forwards #{$animationTime}s;
+    }
+    .line3 {
+        stroke-dasharray: 524.5166015625;
+        stroke-dashoffset: 524.5166015625;
+        animation: drawLine #{$animationTime * 1.5}s ease-out forwards #{$animationTime}s;
+    }
+    .line4 {
+        stroke-dasharray: 380.9153747558594;
+        stroke-dashoffset: 380.9153747558594;
+        animation: drawLine #{$animationTime * 1.3}s ease-in-out forwards #{$animationTime}s;
+    }
+    .line5 {
+        stroke-dasharray: 146.9436492919922;
+        stroke-dashoffset: 146.9436492919922;
+        animation: drawLine #{$animationTime}s forwards #{$animationTime}s;
+    }
+    .line6 {
+        stroke-dasharray:  117.39175415039062;
+        stroke-dashoffset:  117.39175415039062;
+        animation: drawLine #{$animationTime}s forwards #{$animationTime}s;
+    }
+    .line7 {
+        stroke-dasharray: 634.856689453125;
+        stroke-dashoffset: 634.856689453125;
+        animation: drawLine #{$animationTime}s forwards #{$animationTime}s;
+    }
+    .line8 {
+        stroke-dasharray: 23.1932430267334;
+        stroke-dashoffset: 23.1932430267334;
+        animation: drawLine #{$animationTime}s forwards #{$animationTime}s;
+    }
+    .line9 {
+        stroke-dasharray: 63.68996047973633;
+        stroke-dashoffset: 63.68996047973633;
+        animation: drawLine #{$animationTime}s forwards #{$animationTime}s;
+    }
+
+    .circle{
+        opacity: 0;
+        animation: fadeIn 2s forwards #{$animationTime * 2.5}s;
+    }
+}
+
+
+.body-svg{
+    display: none;
+    align-self: flex-start;
+    .body-line{
+        stroke-dasharray: 2598.71923828125;
+        stroke-dashoffset: 2598.71923828125;
+        animation-timeline: view();
+        animation: drawLine #{$animationTime * 2}s ease-in-out forwards;
+    }
+}
+
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0; /* Линия будет рисоваться */
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInCirlce {
+    to {
+        opacity: 1;
+    }
+}
+

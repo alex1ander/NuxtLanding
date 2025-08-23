@@ -1,0 +1,216 @@
+.contact-from {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    position: relative;
+
+    &:has(input:invalid){
+        button{
+            background: var(--support-color);
+            color: var(--prime-color);
+            pointer-events: none;
+        }
+    }
+    &:not(:has(input:invalid)){
+        button{
+            color:#fff;
+            --color-gradient-start:#3EB0D4;
+            --color-gradient-end: #9663C8;
+        }
+    }
+    button{
+        background-color: none;
+        cursor: pointer;
+        z-index: 5;
+        right: 0;
+        top: 16px;
+        outline: none;
+    }
+
+
+    .two-input-blocks{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap:24px;
+    }
+
+    .this-input-block {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+
+        &.required{
+            gap:14px;
+            label{
+                position: relative;
+                .requiredLabel{
+                    position: absolute;
+                    top: 15px;
+                    left: 0;
+                    font-size: 10px;
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.5em;
+        }
+
+        input,textarea {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.5em;
+            padding: 11px 24px;
+            width: 100%;
+            border-radius: 25px;
+            background: var(--prime-color);
+            border: 1px solid #DFE0E1;
+            outline: none;
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus {
+                -webkit-box-shadow: 0 0 0 30px var(--prime-color) inset !important;
+                -webkit-text-fill-color: var(--second-color);
+                caret-color: var(--second-color);
+            }
+        }
+        textarea{
+            min-width: 100%!important;
+            resize: vertical;
+            min-height: 120px;
+        }
+    }
+
+
+}
+
+
+
+@media (max-width: 1440px) {
+    .contact-from {
+        button {
+            position: static;
+        }
+    }
+}
+
+
+
+
+#pop-up{
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    background: rgb(0 0 0 / 40%);
+    backdrop-filter: blur(6px);
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .pop-up-form{
+        padding: 72px;
+        padding-bottom: 102px;
+        border-radius: 20px;
+        height: fit-content;
+        max-width: 744px;
+        width: 100%;
+        background: #fff;
+        position: relative;
+    }
+    .btn-pop-up{
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        cursor: pointer;
+    }
+
+    .contact-from{
+        button{
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: calc(100% + 20px);
+            margin: auto;
+        }
+    }
+
+    h3{
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 1.2em;
+        text-align: center;
+        margin-bottom: 0.6em;
+    }
+    p{
+        font-weight: 400;
+        line-height: 1.5em;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+    #pop-up{
+        .pop-up-form{
+            padding: 20px;
+            padding-bottom: 102px;
+            .btn-pop-up{
+                right: 12px;
+                top: -30px;
+            }
+        }
+    }
+}
+
+
+
+.wrapper-input{
+
+    position: relative;
+    .dropdown-list{
+        position: absolute;
+        right: 21px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        background: var(--second-color);
+        border-radius: 25px;
+        height: 80%;
+
+        .dropdown-head {
+            *{
+                pointer-events: n;
+            }
+            padding: 8px 16px;
+            span{
+                color: var(--prime-color);
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev --hostname 0.0.0.0 --port 3000",
+    "build": "nuxt build",
+    "preview": "nuxt preview --hostname 0.0.0.0 --port 3000"
+  },
+  "dependencies": {
+    "nuxt": "4.0.3"
+  }
+}

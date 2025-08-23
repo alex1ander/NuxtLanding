@@ -1,0 +1,76 @@
+.nav-links{
+    &.related-doctors {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .post-text {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 1.2em;
+            }
+
+            &.prev-post {
+                .sprite-svg-fill {
+                    transform: rotate(180deg);
+                }
+            }
+
+            &.next-post {
+            }
+        }
+    }
+
+    &.related-posts {
+        display: flex;
+        flex-direction: column;
+        gap: 45px;
+
+        a {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .post-arrow {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.5em;
+        }
+
+        .post-text {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 1.2em;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+        }
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .nav-links {
+        &.related-doctors {
+            a {
+                .post-text {
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 1.2em;
+                }
+            }
+        }
+    }
+}
+
+
+

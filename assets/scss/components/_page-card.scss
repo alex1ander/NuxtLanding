@@ -1,0 +1,26 @@
+.page-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .card-image{
+        border-radius: 20px 20px 0 0;
+        width: 100%;
+        aspect-ratio: 1 / 1.2;
+        object-fit: cover;
+        object-position: center;
+        background: var(--support-color);
+    }
+    .card-text{
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span{
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+}

@@ -1,0 +1,61 @@
+.about-us-section{
+
+    .photo-wrapper{
+        max-width: 500px;
+    }
+    padding-top: 50px!important;
+    padding-bottom: 0!important;
+}
+
+
+.parent-svg{
+    position: relative;
+
+    .quotes-svg{
+        position: absolute;
+        transform: translate(10px, calc(-100% - 20px));
+    }
+}
+
+
+.info-wrapper.about-us-wrapper{
+    gap:24px;
+}
+
+.doctor-info {
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    .doctor-name {
+        font-weight: 600;
+        font-size: 18px;
+
+    }
+
+    .doctor-role {
+        color:#7A7B7C;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.5em;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .about-us-section{
+        .two-part-content{
+            flex-direction: column-reverse;
+        }
+        .quotes-svg{
+            position: static;
+            transform: unset;
+        }
+
+        .doctor-name{
+            font-size: 16px;
+        }
+        .doctor-role{
+            font-size:14px;
+        }
+    }
+}

@@ -1,0 +1,123 @@
+.before-after-block{
+    display: flex;
+    gap:32px;
+    justify-content: center;
+    //max-height: 600px;
+
+    height: 100%;
+    width: 100%;
+
+
+
+    .image-comparison{
+        height: 100%;
+        width: 100%;
+        //overflow: hidden;
+
+        img{
+            //width: max-content!important;
+            //height: max-content!important;
+        }
+    }
+
+    @mixin pill-title {
+        display: block;
+        width: 70px;
+        height: 38px;
+        min-width: 70px;
+        padding: 8px 16px;
+        background: #F8F9FC;
+        border-radius: 100px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 1.5em;
+        text-align: center;
+
+    }
+
+    .pill-title{
+        @include pill-title;
+        position: absolute;
+        z-index: 100;
+
+        &.before-pill{
+            top: 20px;
+            left: 20px;
+        }
+        &.after-pill{
+            top: 20px;
+            right: 20px;
+        }
+    }
+
+
+
+    .before{
+        position: relative;
+        img{
+            border-bottom-left-radius: 32px;
+        }
+    }
+    .after{
+        position: relative;
+        img{
+            border-bottom-right-radius: 32px;
+        }
+    }
+}
+
+.before-after-text{
+    padding: 24px 0;
+    .text{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.5em;
+    }
+    .category{
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 1.5em;
+        text-decoration: underline;
+    }
+}
+
+
+.before-after-block-thumbs{
+    display: flex;
+    max-height: 160px;
+    height: 100%;
+    justify-content: center;
+    .prev-image-thumb{
+        aspect-ratio: 13 / 16;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .before-after-block {
+        gap: 16px;
+    }
+
+    .no-slider{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .before-after-block {
+        flex-direction: column;
+
+        .before{
+            img{
+                border-bottom-left-radius: 60px;
+            }
+        }
+        .after{
+            img{
+                border-bottom-right-radius: 60px;
+            }
+        }
+    }
+
+}

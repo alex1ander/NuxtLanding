@@ -1,0 +1,25 @@
+$dark-color: #3F4041;
+$dark-gray-color:#707070;
+
+$white-color: #fff;
+
+$purple-color: #797CCC;
+$yellow-color: rgb(255, 189, 46);
+
+:root {
+    background: rgba(17, 17, 17, 0.4);
+    --prime-color: #{$dark-color};
+    --second-color: #{$white-color};
+    --support-color: #{$dark-gray-color};
+
+
+    .reverse-style{
+        --prime-color: #{$white-color};
+        --second-color: #{$dark-color};
+    }
+}
+
+.dark-style {
+    background: rgba(17, 17, 17, 0.4);
+}
+
