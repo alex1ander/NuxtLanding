@@ -2,23 +2,26 @@
   <div class="inverse-circle" ref="circle"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 
-const circle = ref(null)
-const mouseX = ref(window.innerWidth / 2)
-const mouseY = ref(window.innerHeight / 2)
+const circle = ref<HTMLElement | null>(null)
+
+// Инициализация нулями, чтобы не было ошибок на сервере
+const mouseX = ref(0)
+const mouseY = ref(0)
 
 const updatePosition = () => {
-  // const centerX = window.innerWidth / 2
+  if (!circle.value) return
+
   const centerY = window.innerHeight / 2
 
   const offsetX = mouseX.value
   const offsetY = centerY - (mouseY.value - centerY)
 
   const maxScroll = document.body.scrollHeight - window.innerHeight
-  const scrollPercent = window.scrollY / maxScroll
+  const scrollPercent = maxScroll > 0 ? window.scrollY / maxScroll : 0
   const rotation = scrollPercent * 360
 
   gsap.to(circle.value, {
@@ -30,7 +33,7 @@ const updatePosition = () => {
   })
 }
 
-const handleMouseMove = (event) => {
+const handleMouseMove = (event: MouseEvent) => {
   mouseX.value = event.clientX
   mouseY.value = event.clientY
   updatePosition()
@@ -41,6 +44,10 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
+  // Инициализируем координаты только на клиенте
+  mouseX.value = window.innerWidth / 2
+  mouseY.value = window.innerHeight / 2
+
   window.addEventListener('mousemove', handleMouseMove)
   window.addEventListener('scroll', handleScroll)
 })

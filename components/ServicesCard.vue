@@ -1,214 +1,118 @@
 <template>
-    <section id="price" class="information-section">
-        <div class="content">
+  <section id="price" class="information-section">
+    <div class="content">
 
-            <div class="two-part-content">
-                <h2>{{ $t('serviceTitle') }}</h2>
+      <div class="two-part-content">
+        <h2>{{ t('serviceTitle') }}</h2>
+      </div>
+
+      <p class="opacityAnim info-text">{{ t('serviceText') }}</p>
+
+      <input type="checkbox" id="toggle" class="toggleCheckbox" />
+      <label for="toggle" class="toggleContainer opacityAnim">
+        <div class="cursor-hover">{{ t('btnDevelopment') }}</div>   
+        <div class="cursor-hover">{{ t('btnSupport') }}</div>
+      </label>
+
+      <div class="service-relative animScroll">
+        <div class="servise-grid-wrapper developmentCards">
+          <div 
+            v-for="n in 3" 
+            :key="n" 
+            class="service-card cardAnim"
+          >
+            <div class="bg-image">
+              <img :src="images[n-1]" alt="" />
             </div>
 
-            <p class="opacityAnim info-text">{{ $t('serviceText') }}</p>
+            <div class="top-part"></div>
 
-            <input type="checkbox" id="toggle" class="toggleCheckbox" />
-            <label for="toggle" class="toggleContainer opacityAnim">
-                <div class="cursor-hover">{{ $t('btnDevelopment') }}</div>   
-                <div class="cursor-hover">{{ $t('btnSupport') }}</div>
-            </label>
+            <div class="bottom-part">
+              <div class="title-area">
+                <h3 v-html="t(`serviceCardTitle_${n}`)"></h3>
+                <div class="price">{{ t(`serviceCardPrice_${n}`) }}</div>
+              </div>
 
-            <div class="service-relative animScroll">
-                <div class="servise-grid-wrapper developmentCards">
-
-                    <div class="service-card cardAnim ">
-                        <div class="bg-image">
-                            <img src="../assets/upload/prev1.webp" alt="">
-                        </div>
-
-                        <div class="top-part"></div>
-
-                        <div class="bottom-part">
-                            <div class="title-area">
-                                <h3 v-html="$t('serviceCardTitle_1')"></h3>
-                                <div class="price">{{ $t('serviceCardPrice_1') }}</div>
-                            </div>
-
-                            <div class="content-part">
-                                <p class="text">{{ $t('serviceCardText_1') }}</p>
-                                <div class="benefits">
-                                    <div class="benefit">{{ $t('serviceCardBen_1_1') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_1_2') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_1_3') }}</div>
-                                </div>
-                            </div>
-
-                            <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', $t('serviceCardTitle_1'))">
-                                    <span class="btn-text">{{ $t('consultBtn') }}</span>
-                                    <div class="btn-after"><svg width="14" height="14" class="sprite-svg-fill"><use href="#arrow-service"></use></svg></div>
-                                </button>
-                        </div>
-                    </div>
-
-
-                    <div class="service-card cardAnim ">
-                        <div class="bg-image">
-                            <img src="../assets/upload/prev2.webp" alt="">
-                        </div>
-
-                        <div class="top-part"></div>
-
-                        <div class="bottom-part">
-                            <div class="title-area">
-                                <h3 v-html="$t('serviceCardTitle_2')"></h3>
-                                <div class="price">{{ $t('serviceCardPrice_2') }}</div>
-                            </div>
-                            <div class="content-part">
-                                <p class="text">{{ $t('serviceCardText_2') }}</p>
-                                <div class="benefits">
-                                    <div class="benefit">{{ $t('serviceCardBen_2_1') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_2_2') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_2_3') }}</div>
-                                </div>
-                            </div>
-                            <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', $t('serviceCardTitle_2'))">
-                                    <span class="btn-text">{{ $t('consultBtn') }}</span>
-                                    <div class="btn-after"><svg width="14" height="14" class="sprite-svg-fill"><use href="#arrow-service"></use></svg></div>
-                                </button>
-                        </div>
-                    </div>
-
-
-                    <div class="service-card cardAnim ">
-                        <div class="bg-image">
-                            <img src="../assets/upload/prev3.webp" alt="">
-                        </div>
-
-                        <div class="top-part"></div>
-
-                        <div class="bottom-part">
-                            <div class="title-area">
-                                <h3 v-html="$t('serviceCardTitle_3')"></h3>
-                                <div class="price">{{ $t('serviceCardPrice_3') }}</div>
-                            </div>
-                            <div class="content-part">
-                                <p class="text">{{ $t('serviceCardText_3') }}</p>
-                                <div class="benefits">
-                                    <div class="benefit">{{ $t('serviceCardBen_3_1') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_3_2') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_3_3') }}</div>
-                                </div>
-                            </div>
-                            <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', $t('serviceCardTitle_3'))">
-                                    <span class="btn-text">{{ $t('consultBtn') }}</span>
-                                    <div class="btn-after"><svg width="14" height="14" class="sprite-svg-fill"><use href="#arrow-service"></use></svg></div>
-                                </button>
-                        </div>
-                    </div>
-
-            
-
+              <div class="content-part">
+                <p class="text">{{ t(`serviceCardText_${n}`) }}</p>
+                <div class="benefits">
+                  <div v-for="i in 3" :key="i" class="benefit">
+                    {{ t(`serviceCardBen_${n}_${i}`) }}
+                  </div>
                 </div>
+              </div>
 
-                <div class="servise-grid-wrapper supportCards">
-                    
-                    <div class="service-card cardAnim ">
-                        <div class="bg-image">
-                            <img src="../assets/upload/prev4.webp" alt="">
-                        </div>
-
-                        <div class="top-part"></div>
-
-                        <div class="bottom-part">
-                            <div class="title-area">
-                                <h3 v-html="$t('serviceCardTitle_4')"></h3>
-                                <div class="price">{{ $t('serviceCardPrice_4') }}</div>
-                            </div>
-
-                            <div class="content-part">
-                                <p class="text">{{ $t('serviceCardText_4') }}</p>
-                                <div class="benefits">
-                                    <div class="benefit">{{ $t('serviceCardBen_4_1') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_4_2') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_4_3') }}</div>
-                                </div>
-                            </div>
-
-                            <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', $t('serviceCardTitle_4'))">
-                                    <span class="btn-text">{{ $t('consultBtn') }}</span>
-                                    <div class="btn-after"><svg width="14" height="14" class="sprite-svg-fill"><use href="#arrow-service"></use></svg></div>
-                                </button>
-                        </div>
-                    </div>
-
-
-                    <div class="service-card cardAnim ">
-                        <div class="bg-image">
-                            <img src="../assets/upload/prev5.webp" alt="">
-                        </div>
-
-                        <div class="top-part"></div>
-
-                        <div class="bottom-part">
-                            <div class="title-area">
-                                <h3 v-html="$t('serviceCardTitle_5')"></h3>
-                                <div class="price">{{ $t('serviceCardPrice_5') }}</div>
-                            </div>
-                            <div class="content-part">
-                                <p class="text">{{ $t('serviceCardText_5') }}</p>
-                                <div class="benefits">
-                                    <div class="benefit">{{ $t('serviceCardBen_5_1') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_5_2') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_5_3') }}</div>
-                                </div>
-                            </div>
-                            <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', $t('serviceCardTitle_5'))">
-                                    <span class="btn-text">{{ $t('consultBtn') }}</span>
-                                    <div class="btn-after"><svg width="14" height="14" class="sprite-svg-fill"><use href="#arrow-service"></use></svg></div>
-                                </button>
-                        </div>
-                    </div>
-
-
-                    <div class="service-card cardAnim ">
-                        <div class="bg-image">
-                            <img src="../assets/upload/prev6.webp" alt="">
-                        </div>
-
-                        <div class="top-part"></div>
-
-                        <div class="bottom-part">
-                            <div class="title-area">
-                                <h3 v-html="$t('serviceCardTitle_6')"></h3>
-                                <div class="price">{{ $t('serviceCardPrice_6') }}</div>
-                            </div>
-                            <div class="content-part">
-                                <p class="text">{{ $t('serviceCardText_6') }}</p>
-                                <div class="benefits">
-                                    <div class="benefit">{{ $t('serviceCardBen_6_1') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_6_2') }}</div>
-                                    <div class="benefit">{{ $t('serviceCardBen_6_3') }}</div>
-                                </div>
-                            </div>
-                            <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', $t('serviceCardTitle_6'))">
-                                    <span class="btn-text">{{ $t('consultBtn') }}</span>
-                                    <div class="btn-after"><svg width="14" height="14" class="sprite-svg-fill"><use href="#arrow-service"></use></svg></div>
-                            </button>
-                        </div>
-                    </div>
-                
+              <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', t(`serviceCardTitle_${n}`))">
+                <span class="btn-text">{{ t('consultBtn') }}</span>
+                <div class="btn-after">
+                  <svg width="14" height="14" class="sprite-svg-fill">
+                    <use href="#arrow-service"></use>
+                  </svg>
                 </div>
+              </button>
             </div>
-
+          </div>
         </div>
-    </section>
+
+        <div class="servise-grid-wrapper supportCards">
+          <div 
+            v-for="n in [4,5,6]" 
+            :key="n" 
+            class="service-card cardAnim"
+          >
+            <div class="bg-image">
+              <img :src="images[n-1]" alt="" />
+            </div>
+
+            <div class="top-part"></div>
+
+            <div class="bottom-part">
+              <div class="title-area">
+                <h3 v-html="t(`serviceCardTitle_${n}`)"></h3>
+                <div class="price">{{ t(`serviceCardPrice_${n}`) }}</div>
+              </div>
+
+              <div class="content-part">
+                <p class="text">{{ t(`serviceCardText_${n}`) }}</p>
+                <div class="benefits">
+                  <div v-for="i in 3" :key="i" class="benefit">
+                    {{ t(`serviceCardBen_${n}_${i}`) }}
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn-240 btn-pop-up" @click="$emit('open-contact-form', t(`serviceCardTitle_${n}`))">
+                <span class="btn-text">{{ t('consultBtn') }}</span>
+                <div class="btn-after">
+                  <svg width="14" height="14" class="sprite-svg-fill">
+                    <use href="#arrow-service"></use>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 </template>
 
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
-<script>
-export default {
-  methods: {
-    setService(serviceText) {
-      this.$emit('open-contact-form', serviceText)
-    }
-  }
-}
+const { t } = useI18n()
+
+// Импортируем картинки
+import img1 from '~/assets/upload/prev1.webp'
+import img2 from '~/assets/upload/prev2.webp'
+import img3 from '~/assets/upload/prev3.webp'
+import img4 from '~/assets/upload/prev4.webp'
+import img5 from '~/assets/upload/prev5.webp'
+import img6 from '~/assets/upload/prev6.webp'
+
+const images = [img1, img2, img3, img4, img5, img6]
 </script>
 
 

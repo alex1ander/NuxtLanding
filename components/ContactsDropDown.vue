@@ -4,17 +4,13 @@
       <svg width="24" height="24" class="sprite-svg-fill">
         <use href="#call"></use>
       </svg>
-      <span class="contact-label">{{ $t('phoneNumber') }}</span>
+      <span class="contact-label">{{ t('phoneNumber') }}</span>
     </div>
     <div class="dropdown-body" @click.stop>
       <ul class="selected-list animated-list">
-        <li
-          v-for="contact in contacts"
-          :key="contact.value"
-          class="cursor-hover"
-        >
-          <a :href="contact.value" rel="noopener noreferrer">
-            {{ contact.label }}
+        <li v-for="contact in contacts" :key="contact.key" class="cursor-hover">
+          <a :href="t(contact.hrefKey)" rel="noopener noreferrer">
+            {{ t(contact.labelKey) }}
           </a>
         </li>
       </ul>
@@ -22,35 +18,38 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isDropdownActive: false,
-      contacts: [
-        { label: '+38 012 345 67 89', value: 'tel:+380123456789' },
-        { label: 'support@example.com', value: 'mailto:support@example.com' },
-        { label: '+38 098 765 43 21', value: 'tel:+380987654321' },
-      ],
-    };
-  },
-  methods: {
-    toggleDropdown() {
-      this.isDropdownActive = !this.isDropdownActive;
-    },
-    onClickOutside(event) {
-      if (!this.$refs.dropdown.contains(event.target)) {
-        this.isDropdownActive = false;
-      }
-    },
-  },
-  mounted() {
-    document.addEventListener('click', this.onClickOutside);
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.onClickOutside);
-  },
-};
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const isDropdownActive = ref(false)
+const dropdown = ref<HTMLElement | null>(null)
+
+const contacts = [
+  { key: 'phone1', labelKey: 'phone1_label', hrefKey: 'phone1_href' },
+  { key: 'emailSupport', labelKey: 'email_label', hrefKey: 'email_href' },
+  { key: 'phone2', labelKey: 'phone2_label', hrefKey: 'phone2_href' },
+]
+
+function toggleDropdown() {
+  isDropdownActive.value = !isDropdownActive.value
+}
+
+function onClickOutside(event: MouseEvent) {
+  if (dropdown.value && !dropdown.value.contains(event.target as Node)) {
+    isDropdownActive.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', onClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', onClickOutside)
+})
 </script>
 
 <style scoped lang="scss">

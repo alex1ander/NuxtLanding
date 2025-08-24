@@ -1,7 +1,7 @@
 <template>
-  <div id="pop-up" :class="{ active: active }">
+  <div id="pop-up" :class="{ active: modelValue }">
     <div class="pop-up-form reverse-style">
-      <div class="btn-pop-up" @click="$emit('close')">
+      <div class="btn-pop-up" @click="$emit('update:modelValue', false)">
         <svg width="13" height="13" class="sprite-svg-fill">
           <use href="#close"></use>
         </svg>
@@ -13,15 +13,15 @@
   </div>
 </template>
 
-<script>
-import ContactForm from './ContactForm.vue';
+<script setup lang="ts">
+import ContactForm from './ContactForm.vue'
 
-export default {
-  components: { ContactForm },
+const props = defineProps<{
+  service?: string
+  modelValue: boolean
+}>()
 
-  props: {
-    service: { type: String, default: '' },
-    active: { type: Boolean, default: false },
-  },
-};
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: boolean): void
+}>()
 </script>

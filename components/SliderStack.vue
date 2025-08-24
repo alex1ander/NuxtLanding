@@ -2,11 +2,10 @@
   <section class="information-section padding-0">
     <div class="scrolling-slider">
       <div class="slide-track">
-        <!-- Первый набор картинок -->
         <div v-for="img in images" :key="img.src" class="slide-item">
           <img :src="img.src" :alt="img.alt" />
         </div>
-        <!-- Дубликат для бесконечности -->
+        <!-- Дубликат для бесконечного скролла -->
         <div v-for="img in images" :key="'dup-' + img.src" class="slide-item">
           <img :src="img.src" :alt="img.alt" />
         </div>
@@ -15,33 +14,42 @@
   </section>
 </template>
 
-<script>
-export default {
-  setup() {
-    const images = [
-      { src: require('../assets/upload/gr-html.png'), alt: 'HTML' },
-      { src: require('../assets/upload/gr-css.png'), alt: 'CSS' },
-      { src: require('../assets/upload/gr-js.png'), alt: 'JavaScript' },
-      { src: require('../assets/upload/gr-php.png'), alt: 'PHP' },
-      { src: require('../assets/upload/gr-laravel.png'), alt: 'Laravel' },
-      { src: require('../assets/upload/gr-react.png'), alt: 'React' },
-      { src: require('../assets/upload/gr-vue.png'), alt: 'Vue' },
-      { src: require('../assets/upload/gr-wordpress.png'), alt: 'WordPress' },
-      { src: require('../assets/upload/gr-figma.png'), alt: 'Figma' },
-      { src: require('../assets/upload/gr-telegram.png'), alt: 'Telegram' },
-      { src: require('../assets/upload/gr-android.png'), alt: 'Android' },
-      { src: require('../assets/upload/gr-apple.png'), alt: 'Apple' },
-    ];
-    return { images };
-  },
-};
+<script setup lang="ts">
+// Импорт картинок напрямую из assets
+import grHtml from '@/assets/upload/gr-html.png'
+import grCss from '@/assets/upload/gr-css.png'
+import grJs from '@/assets/upload/gr-js.png'
+import grPhp from '@/assets/upload/gr-php.png'
+import grLaravel from '@/assets/upload/gr-laravel.png'
+import grReact from '@/assets/upload/gr-react.png'
+import grVue from '@/assets/upload/gr-vue.png'
+import grWordpress from '@/assets/upload/gr-wordpress.png'
+import grFigma from '@/assets/upload/gr-figma.png'
+import grTelegram from '@/assets/upload/gr-telegram.png'
+import grAndroid from '@/assets/upload/gr-android.png'
+import grApple from '@/assets/upload/gr-apple.png'
+
+const images = [
+  { src: grHtml, alt: 'HTML' },
+  { src: grCss, alt: 'CSS' },
+  { src: grJs, alt: 'JavaScript' },
+  { src: grPhp, alt: 'PHP' },
+  { src: grLaravel, alt: 'Laravel' },
+  { src: grReact, alt: 'React' },
+  { src: grVue, alt: 'Vue' },
+  { src: grWordpress, alt: 'WordPress' },
+  { src: grFigma, alt: 'Figma' },
+  { src: grTelegram, alt: 'Telegram' },
+  { src: grAndroid, alt: 'Android' },
+  { src: grApple, alt: 'Apple' },
+]
 </script>
 
 <style scoped>
 .scrolling-slider {
   overflow: hidden;
   width: 100%;
-  height: 80px; /* подстраивай под высоту картинок */
+  height: 80px;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -49,13 +57,13 @@ export default {
 
 .slide-track {
   display: flex;
-  width: calc(200%); /* в 2 раза шире для дубликата */
+  width: 200%; /* Два раза шире для бесконечности */
   animation: scroll-left 40s linear infinite;
 }
 
 .slide-item {
   flex: 0 0 auto;
-  padding: 0 40px; /* увеличил отступы */
+  padding: 0 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,11 +77,7 @@ export default {
 }
 
 @keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 </style>

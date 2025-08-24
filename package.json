@@ -1,12 +1,27 @@
 {
-  "name": "nuxt-app",
+  "name": "my-nuxt-app",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev --hostname 0.0.0.0 --port 3000",
+    "dev": "nuxt dev",
     "build": "nuxt build",
-    "preview": "nuxt preview --hostname 0.0.0.0 --port 3000"
+    "start": "nuxt start"
   },
   "dependencies": {
-    "nuxt": "4.0.3"
+    "@nuxtjs/i18n": "^10.0.6",
+    "@studio-freight/lenis": "^1.0.42",
+    "axios": "^1.8.4",
+    "gsap": "^3.12.7",
+    "nuxt": "^4.0.3",
+    "swiper": "^11.2.6",
+    "three": "^0.178.0",
+    "tsparticles": "^3.8.1",
+    "vue-i18n": "^9.14.5",
+    "vue-scrollto": "^2.20.0"
+  },
+  "devDependencies": {
+    "sass": "^1.86.3",
+    "sass-embedded": "^1.90.0",
+    "sass-loader": "^16.0.5",
+    "typescript": "^5.9.2"
   }
 }

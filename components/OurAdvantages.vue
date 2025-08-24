@@ -1,68 +1,66 @@
 <template>
-    <section id="advantages" class="information-section">
+  <section id="advantages" class="information-section">
+    <div class="content top-part-section">
+      <div class="two-part-content">
+        <h2>{{ t('ourAdvantagesTitle') }}</h2>
+      </div>
+    </div>
 
-        <div class="content top-part-section">
-            <div class="two-part-content">
-                <h2>{{ $t('ourAdvantagesTitle') }}</h2>
-            </div>
+    <div class="content">
+      <div class="servise-grid-wrapper our-advantages animScroll">
+        <div
+          v-for="(adv, index) in advantages"
+          :key="index"
+          class="advantage cardAnim reverse-style"
+          ref="advBoxes"
+        >
+          <svg width="100" height="100" class="sprite-svg-fill">
+            <use :href="adv.icon"></use>
+          </svg>
+          <h3>{{ t(adv.titleKey) }}</h3>
+          <p>{{ t(adv.textKey) }}</p>
+          <div class="fill-overlay"></div>
         </div>
-
-        <div class="content">
-
-            <div class="servise-grid-wrapper our-advantages animScroll">
-            <div class="advantage cardAnim reverse-style">
-                <svg width="100" height="100" class="sprite-svg-fill"><use href="#bf-1"></use></svg>
-
-                <h3>{{ $t('advantageTitle_1') }}</h3>
-                <p>{{ $t('advantageText_1') }}</p>
-                <div class="fill-overlay"></div>
-            </div>
-            <div class="advantage cardAnim reverse-style">
-                <svg width="100" height="100" class="sprite-svg-fill"><use href="#bf-2"></use></svg>
-                <h3>{{ $t('advantageTitle_2') }}</h3>
-                <p>{{ $t('advantageText_2') }}</p>
-            </div>
-            <div class="advantage cardAnim reverse-style">
-                <svg width="100" height="100" class="sprite-svg-fill"><use href="#bf-3"></use></svg>
-                <h3>{{ $t('advantageTitle_3') }}</h3>
-                <p>{{ $t('advantageText_3') }}</p>
-            </div>
-            <div class="advantage cardAnim reverse-style">
-                <svg width="100" height="100" class="sprite-svg-fill"><use href="#bf-4"></use></svg>
-                <h3>{{ $t('advantageTitle_4') }}</h3>
-                <p>{{ $t('advantageText_4') }}</p>
-            </div>
-            <div class="advantage cardAnim reverse-style">
-                <svg width="100" height="100" class="sprite-svg-fill"><use href="#bf-5"></use></svg>
-                <h3>{{ $t('advantageTitle_5') }}</h3>
-                <p>{{ $t('advantageText_5') }}</p>
-            </div>
-            <div class="advantage cardAnim reverse-style">
-                <svg width="100" height="100" class="sprite-svg-fill"><use href="#bf-6"></use></svg>
-                <h3>{{ $t('advantageTitle_6') }}</h3>
-                <p>{{ $t('advantageText_6') }}</p>
-            </div>
-            </div>
-        </div>
-    </section>
-
+      </div>
+    </div>
+  </section>
 </template>
 
-<script>
-  document.querySelectorAll('.advantage').forEach(box => {
-    const overlay = box.querySelector('.fill-overlay');
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-    box.addEventListener('mousemove', (e) => {
-      const rect = box.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const percent = (x / rect.width) * 100;
-      overlay.style.width = `${percent}%`;
-    });
+const { t } = useI18n()
+
+// Список преимуществ с ключами переводов и иконками
+const advantages = [
+  { titleKey: 'advantageTitle_1', textKey: 'advantageText_1', icon: '#bf-1' },
+  { titleKey: 'advantageTitle_2', textKey: 'advantageText_2', icon: '#bf-2' },
+  { titleKey: 'advantageTitle_3', textKey: 'advantageText_3', icon: '#bf-3' },
+  { titleKey: 'advantageTitle_4', textKey: 'advantageText_4', icon: '#bf-4' },
+  { titleKey: 'advantageTitle_5', textKey: 'advantageText_5', icon: '#bf-5' },
+  { titleKey: 'advantageTitle_6', textKey: 'advantageText_6', icon: '#bf-6' },
+]
+
+const advBoxes = ref<HTMLDivElement[]>([])
+
+onMounted(() => {
+  advBoxes.value.forEach((box) => {
+    const overlay = box.querySelector('.fill-overlay') as HTMLDivElement
+    if (!overlay) return
+
+    box.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = box.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const percent = (x / rect.width) * 100
+      overlay.style.width = `${percent}%`
+    })
 
     box.addEventListener('mouseleave', () => {
-      overlay.style.width = `0%`;
-    });
-  });
+      overlay.style.width = '0%'
+    })
+  })
+})
 </script>
 
 

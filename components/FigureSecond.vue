@@ -2,23 +2,21 @@
   <div class="second-shape" ref="shape"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 
-const shape = ref(null)
-const mouseX = ref(window.innerWidth / 2)
-const mouseY = ref(window.innerHeight / 2)
+const shape = ref<HTMLElement | null>(null)
+const mouseX = ref(0)
+const mouseY = ref(0)
 
 // Обновление позиции и вращения фигуры
 const updateShape = () => {
+  if (!shape.value) return
 
   const centerX = window.innerWidth / 2
-  // const centerY = window.innerHeight / 2
-
   const offsetX = centerX - (mouseX.value - centerX)
   const offsetY = mouseY.value
-
 
   const maxScroll = document.body.scrollHeight - window.innerHeight
   const scrollPercent = maxScroll > 0 ? window.scrollY / maxScroll : 0
@@ -33,7 +31,7 @@ const updateShape = () => {
   })
 }
 
-const handleMouseMove = (event) => {
+const handleMouseMove = (event: MouseEvent) => {
   mouseX.value = event.clientX
   mouseY.value = event.clientY
   updateShape()
@@ -44,6 +42,10 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
+  // Инициализация значений только на клиенте
+  mouseX.value = window.innerWidth / 2
+  mouseY.value = window.innerHeight / 2
+
   window.addEventListener('mousemove', handleMouseMove)
   window.addEventListener('scroll', handleScroll)
 })

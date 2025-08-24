@@ -1,6 +1,6 @@
 <script setup>
-import LogoText from './LogoText.vue'
-import MenuList from './MenuList.vue'
+import LogoText from '../components/LogoText.vue'
+import MenuList from '../components/MenuList.vue'
 
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -40,7 +40,6 @@ const currentLang = computed(() => (route.params.lang || 'ua').toLowerCase())
         border-radius: 0 0 20px 20px;
     }
     .footer-container{
-        max-width: 1440px;
         margin: auto;
         width: 100%;
         border-radius: 20px;

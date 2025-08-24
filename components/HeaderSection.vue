@@ -113,7 +113,6 @@ header{
     background: none;
 }
 .header-container{
-    max-width: 1440px;
     margin: auto;
     width: 100%;
     text-wrap:nowrap;
