@@ -93,66 +93,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import { useNuxtApp } from '#app'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const props = defineProps({
-  service: { type: String, default: '' }
-})
+const { t, locale } = useI18n()
 
-const { t } = useI18n()
-const nuxtApp = useNuxtApp()
-
-const localService = ref(props.service)
+// Поля формы
 const name = ref('')
 const contactValue = ref('')
-const currentTypeValue = ref('tel')
-const wantsComment = ref(false)
+const localService = ref('')
 const comment = ref('')
-const isDropdownActive = ref(false)
 const honeypot = ref('')
-const loading = ref(false)
-const message = ref({ text: '', type: '' })
+const wantsComment = ref(false)
+const currentTypeValue = ref('tel')
 
-const dropdownRef = ref<HTMLElement | null>(null)
-
+// Дропдаун
 const contactTypes = computed(() => [
   { value: 'email', label: 'Email' },
   { value: 'tel', label: t('phone') },
   { value: 'tg', label: 'Telegram' },
-  { value: 'whatsapp', label: 'WhatsApp' },
+  { value: 'whatsapp', label: 'WhatsApp' }
 ])
+const currentType = computed(() => contactTypes.value.find(c => c.value === currentTypeValue.value) || contactTypes.value[0])
+const isDropdownActive = ref(false)
 
-const currentType = computed(() => contactTypes.value.find(type => type.value === currentTypeValue.value) || contactTypes.value[0])
+// Сообщения и загрузка
+const loading = ref(false)
+const message = ref({ text: '', type: '' })
 
-watch(() => props.service, val => localService.value = val)
-
+// Дропдаун функции
 function selectType(type: { value: string; label: string }) {
   currentTypeValue.value = type.value
   contactValue.value = ''
   isDropdownActive.value = false
   clearMessage()
 }
-
 function toggleDropdown() {
   isDropdownActive.value = !isDropdownActive.value
 }
-
-function onClickOutside(event: MouseEvent) {
-  if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
-    isDropdownActive.value = false
-  }
-}
-
 function clearMessage() {
   message.value = { text: '', type: '' }
 }
 
+// Отправка формы
 async function handleSubmit() {
   clearMessage()
 
-  if (honeypot.value.trim() !== '') return console.warn('Spam detected via honeypot')
+  // Проверка honeypot
+  if (honeypot.value.trim() !== '') return console.warn('Spam detected')
 
   loading.value = true
   try {
@@ -161,33 +149,36 @@ async function handleSubmit() {
       contactType: currentTypeValue.value,
       contactValue: contactValue.value,
       service: localService.value,
-      comment: wantsComment.value ? comment.value.trim() : ''
+      comment: wantsComment.value ? comment.value.trim() : '',
+      lang: locale.value   // <-- добавляем язык
     }
 
-    // Используем $fetch Nuxt 3
-    const apiUrl = nuxtApp.$config.public.apiBase || ''
-    const res = await $fetch(`${apiUrl}/send-lead`, {
+    // POST-запрос на API Nuxt 3
+    const res = await $fetch('/api/sendForm', {
       method: 'POST',
       body: payload
     })
 
     if (res.success) {
-      message.value = { text: t('formMessageSuccess'), type: 'success' }
+      message.value = { text: t('formMessageSuccess') || 'Сообщение отправлено!', type: 'success' }
+      name.value = ''
+      contactValue.value = ''
+      localService.value = ''
+      comment.value = ''
+      wantsComment.value = false
     } else {
-      message.value = { text: t('formMessageErrorSend'), type: 'error' }
+      message.value = { text: t('formMessageErrorSend') || 'Ошибка отправки', type: 'error' }
     }
 
   } catch (err) {
-    console.error('Ошибка при отправке:', err)
-    message.value = { text: t('formMessageErrorServer'), type: 'error' }
+    console.error(err)
+    message.value = { text: t('formMessageErrorServer') || 'Ошибка сервера', type: 'error' }
   } finally {
     loading.value = false
   }
 }
-
-onMounted(() => document.addEventListener('click', onClickOutside))
-onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 </script>
+
 
 <style scoped>
 .form-message {

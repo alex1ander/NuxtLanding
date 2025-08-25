@@ -73,16 +73,21 @@ function switchLanguage(lang: string) {
   localStorage.setItem('lang', lang)
   document.documentElement.lang = lang
 
-  // Меняем URL
-  const segments = route.path.split('/').filter(Boolean)
+  // Только меняем URL без перезагрузки компонента
+  const segments = window.location.pathname.split('/').filter(Boolean)
   if (['ua','ru','en'].includes(segments[0])) {
     segments[0] = lang
   } else {
     segments.unshift(lang)
   }
   const newPath = '/' + segments.join('/')
-  router.replace({ path: newPath, query: route.query })
+
+  // Меняем URL в адресной строке без перезагрузки
+  window.history.replaceState(null, '', newPath + window.location.search)
 
   isDropdownActive.value = false
 }
+
+
+
 </script>

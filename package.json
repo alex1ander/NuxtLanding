@@ -11,6 +11,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "axios": "^1.8.4",
     "gsap": "^3.12.7",
+    "node-telegram-bot-api": "^0.66.0",
     "nuxt": "^4.0.3",
     "swiper": "^11.2.6",
     "three": "^0.178.0",

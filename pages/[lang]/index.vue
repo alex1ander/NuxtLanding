@@ -1,9 +1,11 @@
 <template>
   <div id="top" class="dark-style container">
+    <!-- Статические компоненты -->
     <CursorCircle />
     <FigureFirst />
     <FigureSecond />
     <HeaderSection />
+
     <main>
       <HeroSection @open-contact-form="handleOpenContactForm" />
       <SliderStack />
@@ -15,11 +17,9 @@
       <RunningString />
       <FormSection />
     </main>
+
     <FooterSection />
-    <PopUp
-      v-model="popupVisible"
-      :service="popupService"
-    />
+    <PopUp v-model="popupVisible" :service="popupService" />
     <SvgSprite />
   </div>
 </template>
@@ -48,31 +48,8 @@ import FormSection from '@/components/FormSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
 
 const { $initAnimations, $smoothScroll } = useNuxtApp()
-
 const route = useRoute()
 const { locale, t } = useI18n()
-
-// Реактивные заголовок и описание
-const headTitle = computed(() => t('meta.title'))
-const headDescription = computed(() => t('meta.description'))
-
-// Устанавливаем начальный head
-useHead({
-  title: headTitle.value,
-  meta: [
-    { name: 'description', content: headDescription.value }
-  ]
-})
-
-// Обновляем head при изменении языка
-watch([headTitle, headDescription], ([newTitle, newDesc]) => {
-  useHead({
-    title: newTitle,
-    meta: [
-      { name: 'description', content: newDesc }
-    ]
-  })
-})
 
 // Состояние попапа
 const popupVisible = ref(false)
@@ -84,12 +61,29 @@ function handleOpenContactForm(serviceName: string) {
   popupVisible.value = true
 }
 
-// Устанавливаем язык из URL
+// Устанавливаем язык из URL один раз
 locale.value = route.params.lang || 'en'
 
-// Следим за изменением языка в URL
-watch(() => route.params.lang, (newLang) => {
-  if (newLang) locale.value = newLang
+// Заголовок и описание для head
+const headTitle = computed(() => t('meta.title'))
+const headDescription = computed(() => t('meta.description'))
+
+// Устанавливаем head сразу при инициализации
+useHead({
+  title: headTitle.value,
+  meta: [
+    { name: 'description', content: headDescription.value }
+  ]
+})
+
+// Следим за изменением языка и обновляем head динамически
+watch(locale, () => {
+  useHead({
+    title: t('meta.title'),
+    meta: [
+      { name: 'description', content: t('meta.description') }
+    ]
+  })
 })
 
 onMounted(() => {
