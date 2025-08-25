@@ -57,8 +57,15 @@ const images = [
 
 .slide-track {
   display: flex;
-  width: 200%; /* Два раза шире для бесконечности */
+  width: 200%;
   animation: scroll-left 40s linear infinite;
+  transform: translate3d(0, 0, 0); /* Добавляем аппаратное ускорение */
+}
+
+@media(max-width:500px){
+  .slide-track {
+    animation: scroll-left 20s linear infinite;
+  }
 }
 
 .slide-item {

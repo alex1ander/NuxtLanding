@@ -20,14 +20,14 @@ const currentLang = computed(() => (route.params.lang || 'ua').toLowerCase())
         <LogoText />
       </div>
       <MenuList />
-      <p>Copyright © 2025 BitAlexis. All rights reserved.</p>
-      <ul class="useful-links main-menu no-animate">
+      <p class="copyright-text">{{ t('copyrightText')}}</p>
+      <!-- <ul class="useful-links main-menu no-animate">
         <li>
           <router-link :to="`/${currentLang}/contacts`">
             {{ t('our_contacts') }}
           </router-link>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </footer>
 </template>
@@ -38,6 +38,11 @@ const currentLang = computed(() => (route.params.lang || 'ua').toLowerCase())
         z-index: 1;
         padding: 20px;
         border-radius: 0 0 20px 20px;
+    }
+
+    .copyright-text{
+      text-align: center;
+      text-wrap: balance;
     }
     .footer-container{
         margin: auto;

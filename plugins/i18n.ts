@@ -7,11 +7,11 @@ import ru from '../locales/ru.json'
 export default defineNuxtPlugin((nuxtApp) => {
   const i18n = createI18n({
     legacy: false,
+    globalInjection: true, // чтобы работало $t в шаблонах
     locale: 'en',
     fallbackLocale: 'en',
     messages: { en, ua, ru }
   })
 
-  nuxtApp.provide('i18n', i18n)
   nuxtApp.vueApp.use(i18n)
 })

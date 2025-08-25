@@ -37,7 +37,7 @@ const handleClick = () => {
 }
 
 // Формируем путь с текущим языком
-const getLink = (href) => `/${locale.value}/${href}`
+const getLink = (href) => `/${locale.value}${href.startsWith('#') ? href : '/' + href}`
 </script>
 
 <template>

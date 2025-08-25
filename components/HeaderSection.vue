@@ -126,7 +126,7 @@ header{
         content: '';
         height: 100%;
         width: 100%;
-        border-radius: 30px;
+        border-radius: 20px;
         position: absolute;
         backdrop-filter: blur(6px) saturate(150%);
         -webkit-backdrop-filter: blur(6px) saturate(150%);
@@ -172,14 +172,4 @@ header{
         padding-right: $content-padding;
     }
 }
-
-
-
-@media (max-width: 1024px) {
-
-    .header-container {
-        // border-radius: 30px;
-    }
-}
-
 </style>

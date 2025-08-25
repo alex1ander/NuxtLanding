@@ -6,7 +6,7 @@
 
     <!-- Поле имени -->
     <div class="this-input-block required">
-      <input type="text" v-model="localService" name="service" readonly />
+      <input type="hidden" v-model="localService" name="service" readonly />
       <label for="name">
         {{ t('formLabelName') }}
         <span class="requiredLabel">{{ t('required') }}</span>
