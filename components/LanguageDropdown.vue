@@ -76,7 +76,7 @@ function switchLanguage(lang: string) {
 
   // Только меняем URL без перезагрузки компонента
   const segments = window.location.pathname.split('/').filter(Boolean)
-  if (['ua','ru','en'].includes(segments[0])) {
+  if (['ua','ru','en','de'].includes(segments[0])) {
     segments[0] = lang
   } else {
     segments.unshift(lang)
