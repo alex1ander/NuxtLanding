@@ -6,10 +6,10 @@ import { useI18n } from 'vue-i18n'
 const router = useRouter()
 const { locale } = useI18n()
 
-const supportedLangs = ['en', 'ru', 'ua']
+const supportedLangs = ['en', 'ru', 'ua', 'de']
 
 onMounted(() => {
-  const browserLang = navigator.language.slice(0, 2) // 'en', 'ru', 'ua'
+  const browserLang = navigator.language.slice(0, 2) // 'en', 'ru', 'ua', 'de'
   const defaultLang = supportedLangs.includes(browserLang) ? browserLang : 'en'
 
   // Сохраняем язык

@@ -42,6 +42,7 @@ const languages = [
   { code: 'ua', label: 'Українська' },
   { code: 'ru', label: 'Русский' },
   { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },
 ]
 
 function toggleDropdown() {

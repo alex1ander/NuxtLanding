@@ -7,12 +7,12 @@
     </div>
     <div id="mobile-menu" class="menu mobile-menu" :class="{ active: isOpen }">
       <MenuList :isOpen="isOpen" @close-menu="isOpen = false" />
-      <a :href="'tel:' + t('phoneNumberHref')" class="text-with-svg btn-backarea">
+      <span class="text-with-svg btn-backarea">
         <svg width="24" height="24" class="sprite-svg-fill">
           <use href="#call"></use>
         </svg>
         <span>{{ t('phoneNumber') }}</span>
-      </a>
+      </span>
     </div>
   </div>
 </template>

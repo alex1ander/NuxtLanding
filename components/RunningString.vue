@@ -5,10 +5,12 @@
         <div class="line-help line">
           <div class="line-text">{{ t('lineText') }}</div>
           <div class="line-text">{{ t('lineText') }}</div>
+          <div class="line-text">{{ t('lineText') }}</div>
         </div>
       </div>
       <div class="container-lines second-line">
         <div class="line-help line">
+          <div class="line-text">{{ t('lineText') }}</div>
           <div class="line-text">{{ t('lineText') }}</div>
           <div class="line-text">{{ t('lineText') }}</div>
         </div>
@@ -31,15 +33,16 @@ section {
 .promo-lines {
   position: relative;
 }
+
 .container-lines {
   position: absolute;
   top: 0;
-  left: -5%;
+  left: -2%;
   right: 0;
   margin: auto;
   overflow: hidden;
   z-index: 5;
-  width: 120%;
+  width: 140%;
 }
 
 .first-line {
@@ -73,11 +76,18 @@ section {
   animation: animate-second-screen 80s -40s linear infinite;
 }
 
+.first-line .line-text:nth-child(3) {
+  animation: animate-first-screen 80s -80s linear infinite;
+}
+
 .second-line .line-text {
   animation: animate-first-screen-reverse 80s -80s linear infinite;
 }
 .second-line .line-text:nth-child(2) {
   animation: animate-second-screen-reverse 80s -40s linear infinite;
+}
+.second-line .line-text:nth-child(3) {
+  animation: animate-first-screen-reverse 80s -80s linear infinite;
 }
 
 .line {
@@ -129,6 +139,16 @@ section {
 @media (max-width: 769px) {
   .promo-lines .line-text {
     font-size: 36px;
+  }
+
+  .line::before {
+    height: 3px;
+    top: 7px;
+  }
+
+  .line::after {
+    height: 3px;
+    bottom: 7px;
   }
 }
 </style>

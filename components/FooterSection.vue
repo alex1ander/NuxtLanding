@@ -4,13 +4,11 @@ import MenuList from '../components/MenuList.vue'
 
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
 
 const { t } = useI18n()
 const route = useRoute()
 
-// Реактивный текущий язык из URL, по умолчанию 'ua'
-const currentLang = computed(() => (route.params.lang || 'ua').toLowerCase())
+
 </script>
 
 <template>
@@ -21,13 +19,6 @@ const currentLang = computed(() => (route.params.lang || 'ua').toLowerCase())
       </div>
       <MenuList />
       <p class="copyright-text">{{ t('copyrightText')}}</p>
-      <!-- <ul class="useful-links main-menu no-animate">
-        <li>
-          <router-link :to="`/${currentLang}/contacts`">
-            {{ t('our_contacts') }}
-          </router-link>
-        </li>
-      </ul> -->
     </div>
   </footer>
 </template>

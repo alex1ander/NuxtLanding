@@ -305,18 +305,43 @@ const images = [img1, img2, img3, img4, img5, img6]
     display: none;
 }
 
-.cardAnim{
-    display: flex;
-    flex-direction: column;
-    transform: scaleX(1);
-    transition: transform 0.6s ease;
+/* Для developmentCards */
+.toggleCheckbox:checked ~ .service-relative .developmentCards .cardAnim {
+    transform: scale(0);
 }
 
-.toggleCheckbox:checked ~ .service-relative .developmentCards .cardAnim{  
-    transform: scaleX(0);
+/* Задержка для анимации при отображении */
+.developmentCards .cardAnim {
+    transform: scale(1);
+    transition: transform 0.6s ease;
+    &:nth-child(1) {
+        transition-delay: 0s;
+    }
+    &:nth-child(2) {
+        transition-delay: 0.1s;
+    }
+    &:nth-child(3) {
+        transition-delay: 0.2s;
+    }
 }
-.toggleCheckbox:not(:checked) ~ .service-relative .supportCards .cardAnim{  
-    transform: scaleX(0)
+
+/* Для supportCards */
+.toggleCheckbox:not(:checked) ~ .service-relative .supportCards .cardAnim {
+    transform: scale(0);
+}
+
+.supportCards .cardAnim {
+    transform: scale(1);
+    transition: transform 0.6s ease;
+    &:nth-child(1) {
+        transition-delay: 0s;
+    }
+    &:nth-child(2) {
+        transition-delay: 0.1s;
+    }
+    &:nth-child(3) {
+        transition-delay: 0.2s;
+    }
 }
 
 .service-relative{

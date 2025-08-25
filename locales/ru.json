@@ -3,8 +3,11 @@
     "title": "Сайты под ключ для бизнеса, стартапов и MVP — BitAlexis",
     "description": "Создаем сайты под ключ: корпоративные, интернет-магазины, лендинги, MVP и другие решения для бизнеса. Полный цикл разработки — от идеи до запуска и поддержки клиентов в Украине, Европе и США."
   },
+  
   "currentLanguageCode": "RU",
   "currentLanguage": "Русский",
+
+  "phoneNumber": "+49 176 60887834",
 
   "menuOurServices": "Наши услуги",
   "menuOurWorks": "Наши работы",
@@ -68,7 +71,7 @@
 
   "serviceCardTitle_1": "Лендинг",
   "serviceCardText_1": "Современный лендинг или сайт-визитка для представления бизнеса и привлечения клиентов.",
-  "serviceCardPrice_1": "150$",
+  "serviceCardPrice_1": "От 150$",
 
   "serviceCardBen_1_1": "Дизайн: 2 ч",
   "serviceCardBen_1_2": "Разработка: 8 ч",
@@ -76,7 +79,7 @@
 
   "serviceCardTitle_2": "Бизнес-сайт",
   "serviceCardText_2": "Удобный сайт для статей, портфолио или услуг — решение для компаний и специалистов.",
-  "serviceCardPrice_2": "499$",
+  "serviceCardPrice_2": "От 500$",
 
   "serviceCardBen_2_1": "Дизайн: 4 ч",
   "serviceCardBen_2_2": "Разработка: 60 ч",
@@ -84,7 +87,7 @@
 
   "serviceCardTitle_3": "Интернет-магазин",
   "serviceCardText_3": "Онлайн-магазин на популярной платформе или индивидуальной разработке для продаж в интернете.",
-  "serviceCardPrice_3": "999$",
+  "serviceCardPrice_3": "От 1000$",
 
   "serviceCardBen_3_1": "Дизайн: 8 ч",
   "serviceCardBen_3_2": "Разработка: 80 ч",
@@ -92,7 +95,7 @@
 
   "serviceCardTitle_4": "Создание дизайна",
   "serviceCardText_4": "Стильные и удобные макеты, подчеркивающие бренд и удерживающие внимание.",
-  "serviceCardPrice_4": "149$",
+  "serviceCardPrice_4": "От 149$",
 
   "serviceCardBen_4_1": "Уникальный стиль",
   "serviceCardBen_4_2": "Удобный интерфейс",
@@ -100,7 +103,7 @@
 
   "serviceCardTitle_5": "Продвижение сайта",
   "serviceCardText_5": "SEO и стратегия продвижения для роста трафика, заявок и продаж.",
-  "serviceCardPrice_5": "149$",
+  "serviceCardPrice_5": "От 149$",
 
   "serviceCardBen_5_1": "SEO под ключ",
   "serviceCardBen_5_2": "Анализ структуры",
@@ -136,23 +139,5 @@
   "loading": "Загрузка...",
   "required": "(обязательно)",
 
-  "copyrightText": "Copyright © 2025 BitAlexis. All rights reserved.",
-
-  "our_contacts": "Наши контакты",
-  "contactTitle": "Свяжитесь с нами",
-  "contactIntro": "Мы будем рады вашему обращению! Свяжитесь с нами любым из следующих способов.",
-
-  "contactAddressTitle": "Наш адрес",
-  "contactAddressText": "123 Main Street, City, Country",
-
-  "contactPhoneTitle": "Телефон",
-  "contactPhoneText": "+1 (555) 123-4567",
-
-  "contactEmailTitle": "Электронная почта",
-  "contactEmailText": "info@example.com",
-
-  "contactFormTitle": "Контактная форма",
-  "contactFormText": "Заполните форму на нашем сайте, и мы свяжемся с вами как можно скорее",
-
-  "contactUpdated": "Последнее обновление: 14 августа 2025 г."
+  "copyrightText": "Авторские права © 2025 BitAlexis. Все права защищены."
 }

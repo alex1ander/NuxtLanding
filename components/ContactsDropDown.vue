@@ -9,8 +9,8 @@
     <div class="dropdown-body" @click.stop>
       <ul class="selected-list animated-list">
         <li v-for="contact in contacts" :key="contact.key" class="cursor-hover">
-          <a :href="t(contact.hrefKey)" rel="noopener noreferrer">
-            {{ t(contact.labelKey) }}
+          <a :href="contact.hrefKey" rel="noopener noreferrer">
+            {{ contact.labelKey }}
           </a>
         </li>
       </ul>
@@ -28,9 +28,9 @@ const isDropdownActive = ref(false)
 const dropdown = ref<HTMLElement | null>(null)
 
 const contacts = [
-  { key: 'phone1', labelKey: 'phone1_label', hrefKey: 'phone1_href' },
-  { key: 'emailSupport', labelKey: 'email_label', hrefKey: 'email_href' },
-  { key: 'phone2', labelKey: 'phone2_label', hrefKey: 'phone2_href' },
+  { key: 'phone1', labelKey: '+49 176 60887834', hrefKey: 'tel:+4917660887834' },
+  { key: 'emailSupport', labelKey: 'BitAlexis@gmail.com', hrefKey: 'mailto:bitalexis@gmail.com' },
+  { key: 'phone2', labelKey: '+49 176 12345678', hrefKey: 'tel:+4917612345678' },
 ]
 
 function toggleDropdown() {

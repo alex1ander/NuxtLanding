@@ -1,6 +1,174 @@
 {
-  "studioText": "Studio text here en",
-  "mainTitle": "Main title here",
-  "mainSubTitle": "Main subtitle here",
-  "consultBtn": "Consult"
+"meta": {
+"title": "Turnkey websites for business, startups and MVPs — BitAlexis",
+"description": "We create turnkey websites: corporate, online stores, landing pages, MVPs and other business solutions. Full development cycle — from idea to launch and customer support in Ukraine, Europe and the USA."
+},
+
+"currentLanguageCode": "RU",
+
+"currentLanguage": "Russian",
+
+"phoneNumber": "+49 176 60887834",
+
+"menuOurServices": "Our services",
+
+"menuOurWorks": "Our works",
+
+"menuAboutUs": "About us",
+
+"menuPrice": "Prices",
+
+"mainTitle": "Web development, where the future of your business begins",
+
+"mainSubTitle": "We will find the optimal solution for your business",
+
+"consultBtn": "Get a consultation",
+
+"studioText": "Website development studio",
+
+"servicesTitle": "Our key services",
+
+"serviceTitle_1": "Website creation",
+
+"serviceText_1": "We develop websites of any complexity: from landing pages to corporate portals, adapted to business tasks",
+
+"serviceTitle_2": "MVP Development",
+"serviceText_2": "We create (MVP) for startups — quickly, efficiently and taking into account priority functionality",
+
+"serviceTitle_3": "Online stores",
+"serviceText_3": "We design and implement eCommerce solutions with a convenient shopping cart, filters, payment and mobile adaptation",
+
+"serviceTitle_4": "SEO optimization",
+"serviceText_4": "We improve website positions in search engines: speed, structure, content and technical SEO setup",
+
+"serviceTitle_5": "Website support",
+"serviceText_5": "We provide regular updates, monitoring, backup, edits and technical assistance",
+
+"serviceTitle_6": "UI/UX design",
+"serviceText_6": "We create a clear and attractive interface: prototypes, design layouts and adaptation for all devices",
+
+"ourCasesTitle": "Completed projects",
+
+"ourAdvantagesTitle": "Why choose us",
+
+"advantageTitle_1": "Individual approach",
+"advantageText_1": "Each project is unique. We select solutions for the specific goals of your business",
+
+"advantageTitle_2": "Design with an emphasis on the result",
+
+"advantageText_2": "We create not just beautifully, but effectively: so that the site sells, attracts and is remembered",
+
+"advantageTitle_3": "Transparency and terms",
+
+"advantageText_3": "A clear plan, understandable stages and adherence to deadlines - we value your time",
+
+"advantageTitle_4": "Flexibility and involvement",
+"advantageText_4": "We easily adapt to changes, offer ideas and are always on connections",
+
+"advantageTitle_5": "Deep expertise",
+"advantageText_5": "Experience in WordPress, eCommerce, UX/UI and SEO allows us to create high-quality turnkey solutions",
+
+"advantageTitle_6": "Support after launch",
+
+"advantageText_6": "We don't disappear after the project is delivered — we support, develop and help you grow",
+
+"consultTitle": "Leave a request and we will create the website of your dreams",
+
+"serviceTitle": "Website creation and development services",
+"serviceText": "We will create a website or web application for you — from a landing page to an online store, and also provide design, promotion and support services. You can familiarize yourself with our basic services and leave a request with the option you need",
+
+"btnDevelopment": "Development",
+"btnSupport": "Support",
+
+"serviceCardTitle_1": "Landing",
+"serviceCardText_1": "A modern landing page or business card site for presenting a business and attracting clients.",
+"serviceCardPrice_1": "From $150",
+
+"serviceCardBen_1_1": "Design: 2 hrs",
+"serviceCardBen_1_2": "Development: 8 hrs",
+"serviceCardBen_1_3": "Goal: Attracting applications",
+
+"serviceCardTitle_2": "Business site",
+"serviceCardText_2": "A convenient site for articles, portfolio or services - a solution for companies and specialists.",
+"serviceCardPrice_2": "From $500",
+
+"serviceCardBen_2_1": "Design: 4 hrs",
+"serviceCardBen_2_2": "Development: 60 hrs",
+"serviceCardBen_2_3": "Goal: Brand presentation",
+
+"serviceCardTitle_3": "Online store",
+
+"serviceCardText_3": "Online store on a popular platform or custom development for online sales.",
+
+"serviceCardPrice_3": "From $1000",
+
+"serviceCardBen_3_1": "Design: 8 hours",
+
+"serviceCardBen_3_2": "Development: 80 hours",
+
+"serviceCardBen_3_3": "Goal: Selling products",
+
+"serviceCardTitle_4": "Design creation",
+
+"serviceCardText_4": "Stylish and convenient layouts that emphasize the brand and hold attention.",
+
+"serviceCardPrice_4": "From $149",
+
+"serviceCardBen_4_1": "Unique style",
+
+"serviceCardBen_4_2": "User-friendly interface",
+"serviceCardBen_4_3": "Adaptability",
+
+"serviceCardTitle_5": "Website promotion",
+
+"serviceCardText_5": "SEO and promotion strategy for traffic, requests and sales growth.",
+"serviceCardPrice_5": "From $149",
+
+"serviceCardBen_5_1": "Turnkey SEO",
+
+"serviceCardBen_5_2": "Structure analysis",
+
+"serviceCardBen_5_3": "Visibility growth",
+
+"serviceCardTitle_6": "Website support",
+
+"serviceCardText_6": "Technical support, updates and website protection.",
+"serviceCardPrice_6": "From $149",
+
+"serviceCardBen_6_1": "Updates",
+"serviceCardBen_6_2": "Bug fixes",
+
+"serviceCardBen_6_3": "24/7 monitoring",
+
+"questionTitle": "Any questions left?",
+
+"questionText": "If you have any questions or would like to get advice, leave your details in the form. We will be happy to contact you",
+
+"formLabelName": "Your name:",
+
+"formLabelContact": "Your contact:",
+
+"phone": "Phone",
+
+"formPlaceholderType": "+38 ____ ___ ___",
+
+"lineText": "We will help you solve your problem!",
+
+"formMessageSuccess": "✅ Your request has been successfully sent. Thank you for contacting us!",
+
+"formMessageErrorSend": "❌ An error occurred while sending the form. Please try again later.",
+
+"formMessageErrorServer": "⚠️ The server is temporarily unavailable. Please try again later.",
+
+"formIsWantsComment": "Want to leave a comment?",
+
+"formLabelComment": "Comment:",
+
+"formPlaceholderComment": "Enter your comment here...",
+
+"loading": "Loading...",
+
+"required": "(required)",
+
+"copyrightText": "Copyright © 2025 BitAlexis. All rights reserved."
 }

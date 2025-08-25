@@ -8,7 +8,7 @@ const textArray = text.split('')
 const textContainer = ref(null)
 const route = useRoute()
 
-const currentLang = computed(() => route.params.lang || 'ua')
+const currentLang = computed(() => route.params.lang || 'en')
 
 onMounted(() => {
   const chars = textContainer.value.querySelectorAll('.char')

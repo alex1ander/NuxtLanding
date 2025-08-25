@@ -1,0 +1,174 @@
+{
+"meta": {
+"title": "Schlüsselfertige Websites für Unternehmen, Startups und MVPs – BitAlexis",
+"description": "Wir erstellen schlüsselfertige Websites: Unternehmenswebsites, Online-Shops, Landingpages, MVPs und andere Geschäftslösungen. Der komplette Entwicklungszyklus – von der Idee bis zur Markteinführung – inklusive Kundensupport in der Ukraine, Europa und den USA."
+},
+
+"currentLanguageCode": "RU",
+
+"currentLanguage": "Russisch",
+
+"phoneNumber": "+49 176 60887834",
+
+"menuOurServices": "Unsere Leistungen",
+
+"menuOurWorks": "Unsere Leistungen",
+
+"menuAboutUs": "Über uns",
+
+"menuPrice": "Preise",
+
+"mainTitle": "Webentwicklung – der Beginn der Zukunft Ihres Unternehmens",
+
+"mainSubTitle": "Wir finden die optimale Lösung für Ihr Unternehmen",
+
+"consultBtn": "Beratung anfordern",
+
+"studioText": "Website-Entwicklungsstudio",
+
+"servicesTitle": "Unsere wichtigsten Leistungen",
+
+"serviceTitle_1": "Website-Erstellung",
+
+"serviceText_1": "Wir entwickeln Websites jeder Komplexität: von Landingpages bis hin zu Unternehmensportalen, angepasst an Ihre Geschäftsanforderungen",
+
+"serviceTitle_2": "MVP Entwicklung",
+"serviceText_2": "Wir erstellen (MVP) für Startups – schnell, effizient und unter Berücksichtigung der wichtigsten Funktionalitäten",
+
+"serviceTitle_3": "Online-Shops",
+"serviceText_3": "Wir konzipieren und implementieren E-Commerce-Lösungen mit praktischem Warenkorb, Filtern, Zahlungsmöglichkeiten und mobiler Anpassung",
+
+"serviceTitle_4": "SEO-Optimierung",
+"serviceText_4": "Wir verbessern die Position Ihrer Website in Suchmaschinen: Geschwindigkeit, Struktur, Inhalt und technische SEO-Konfiguration",
+
+"serviceTitle_5": "Website-Support",
+"serviceText_5": "Wir bieten regelmäßige Updates, Monitoring, Backup, Bearbeitungen und technische Unterstützung",
+
+"serviceTitle_6": "UI/UX-Design",
+"serviceText_6": "Wir erstellen eine übersichtliche und attraktive Benutzeroberfläche: Prototypen, Design-Layouts und Anpassung für alle Geräte",
+
+"ourCasesTitle": "Abgeschlossene Projekte",
+
+"ourAdvantagesTitle": "Warum Sie sich für uns entscheiden sollten",
+
+"advantageTitle_1": "Individuell Ansatz",
+"advantageText_1": "Jedes Projekt ist einzigartig. Wir wählen Lösungen für die spezifischen Ziele Ihres Unternehmens",
+
+"advantageTitle_2": "Ergebnisorientiertes Design",
+
+"advantageText_2": "Wir gestalten nicht nur ansprechend, sondern auch effektiv: Damit Ihre Website verkauft, anspricht und im Gedächtnis bleibt",
+
+"advantageTitle_3": "Transparenz und Konditionen",
+
+"advantageText_3": "Ein klarer Plan, verständliche Schritte und Termintreue – wir schätzen Ihre Zeit",
+
+"advantageTitle_4": "Flexibilität und Engagement",
+"advantageText_4": "Wir passen uns schnell an Veränderungen an, bringen Ideen ein und sind stets vernetzt",
+
+"advantageTitle_5": "Umfassende Expertise",
+"advantageText_5": "Unsere Erfahrung in WordPress, E-Commerce, UX/UI und SEO ermöglicht es uns, hochwertige Komplettlösungen zu entwickeln",
+
+"advantageTitle_6": "Support nach Launch",
+
+"advantageText_6": "Wir verschwinden nicht nach Projektabschluss – wir unterstützen, entwickeln und helfen Ihnen beim Wachstum",
+
+"consultTitle": "Fragen Sie uns an und wir erstellen Ihre Traumwebsite",
+
+"serviceTitle": "Website-Erstellung und -Entwicklung",
+"serviceText": "Wir erstellen Ihre Website oder Webanwendung – von der Landingpage bis zum Onlineshop. Darüber hinaus bieten wir Design, Werbung und Support an. Informieren Sie sich über unsere Basisleistungen und fordern Sie die gewünschte Option an",
+
+"btnDevelopment": "Entwicklung",
+"btnSupport": "Support",
+
+"serviceCardTitle_1": "Landingpage",
+"serviceCardText_1": "Eine moderne Landingpage oder Visitenkarten-Website zur Unternehmenspräsentation und Kundengewinnung.",
+"serviceCardPrice_1": "Ab 150 $",
+
+"serviceCardBen_1_1": "Design: 2 Std.",
+"serviceCardBen_1_2": "Entwicklung: 8 Std.",
+"serviceCardBen_1_3": "Ziel: Bewerbungen generieren",
+
+"serviceCardTitle_2": "Business-Website",
+"serviceCardText_2": "Eine praktische Website für Artikel, Portfolio oder Dienstleistungen – eine Lösung für Unternehmen und Spezialisten.",
+"serviceCardPrice_2": "Ab 500 $",
+
+"serviceCardBen_2_1": "Design: 4 Std.",
+"serviceCardBen_2_2": "Entwicklung: 60 Std.",
+"serviceCardBen_2_3": "Ziel: Markenpräsentation",
+
+"serviceCardTitle_3": "Online-Shop",
+
+"serviceCardText_3": "Online-Shop auf einer gängigen Plattform oder individuelle Entwicklung für den Online-Verkauf.",
+
+"serviceCardPrice_3": "Ab 1000 $",
+
+"serviceCardBen_3_1": "Design: 8 Std.",
+
+"serviceCardBen_3_2": "Entwicklung: 80 Stunden",
+
+"serviceCardBen_3_3": "Ziel: Produkte verkaufen",
+
+"serviceCardTitle_4": "Designerstellung",
+
+"serviceCardText_4": "Stilvolle und praktische Layouts, die die Marke hervorheben und Aufmerksamkeit erregen",
+
+"serviceCardPrice_4": "Ab 149 $",
+
+"serviceCardBen_4_1": "Einzigartiger Stil",
+
+"serviceCardBen_4_2": "Benutzerfreundliche Oberfläche",
+"serviceCardBen_4_3": "Anpassbarkeit",
+
+"serviceCardTitle_5": "Website-Werbung",
+
+"serviceCardText_5": "SEO- und Werbestrategie für mehr Traffic, Anfragen und Umsatz",
+"serviceCardPrice_5": "Ab 149 $",
+
+"serviceCardBen_5_1": "Schlüsselfertige SEO",
+
+"serviceCardBen_5_2": "Strukturanalyse",
+
+"serviceCardBen_5_3": "Sichtbarkeitssteigerung",
+
+"serviceCardTitle_6": "Website-Support",
+
+"serviceCardText_6": "Technischer Support, Updates und Website-Schutz.",
+"serviceCardPrice_6": "Ab 149 $",
+
+"serviceCardBen_6_1": "Updates",
+"serviceCardBen_6_2": "Fehlerbehebungen",
+
+"serviceCardBen_6_3": "24/7-Überwachung",
+
+"questionTitle": "Haben Sie noch Fragen?",
+
+"questionText": "Wenn Sie Fragen haben oder eine Beratung wünschen, hinterlassen Sie Ihre Daten im Formular. Wir melden uns gerne bei Ihnen.",
+
+"formLabelName": "Ihr Name:",
+
+"formLabelContact": "Ihr Ansprechpartner:",
+
+"phone": "Telefonnummer",
+
+"formPlaceholderType": "+38 ____ ___ ___",
+
+"lineText": "Wir helfen Ihnen bei der Lösung Ihres Problems!",
+
+"formMessageSuccess": "✅ Ihre Anfrage wurde erfolgreich versendet. Vielen Dank für Ihre Kontaktaufnahme!",
+
+"formMessageErrorSend": "❌ Beim Senden des Formulars ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
+
+"formMessageErrorServer": "⚠️ Der Server ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später noch einmal.",
+
+"formIsWantsComment": "Möchten Sie einen Kommentar hinterlassen?",
+
+"formLabelComment": "Kommentar:",
+
+"formPlaceholderComment": "Geben Sie hier Ihren Kommentar ein...",
+
+"loading": "Wird geladen...",
+
+"required": "(erforderlich)",
+
+"copyrightText": "Copyright © 2025 BitAlexis. Alle Rechte vorbehalten."
+}
