@@ -14,8 +14,8 @@
         <div class="cursor-hover">{{ t('btnSupport') }}</div>
       </label>
 
-      <div class="service-relative animScroll">
-        <div class="servise-grid-wrapper developmentCards">
+      <div class="service-relative">
+        <div class="servise-grid-wrapper developmentCards animScroll">
           <div 
             v-for="n in 3" 
             :key="n" 
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-        <div class="servise-grid-wrapper supportCards">
+        <div class="servise-grid-wrapper supportCards animScroll">
           <div 
             v-for="n in [4,5,6]" 
             :key="n" 

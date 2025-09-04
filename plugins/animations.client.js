@@ -25,9 +25,10 @@ export default defineNuxtPlugin(() => {
             opacity: 1,
             scrollTrigger: {
               trigger: card,
-              start: `top+=${(index % gridCount) * 100} bottom-=20`,
-              end: '+=100 center',
+              start: `center+=${(index % gridCount) * 50} bottom-=20`,
+              end: '+=50 center',
               scrub: true,
+              markers: true
             },
           }
         )
