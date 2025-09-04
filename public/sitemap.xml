@@ -8,6 +8,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en"/>
   </url>
 
   <url>
@@ -16,6 +17,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en"/>
   </url>
 
   <url>
@@ -24,6 +26,7 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en"/>
   </url>
 
   <url>
@@ -32,6 +35,43 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en"/>
+  </url>
+
+  <url>
+    <loc>https://bitalexis.com/ru/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://bitalexis.com/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en/contacts"/>
+  </url>
+
+  <url>
+    <loc>https://bitalexis.com/ua/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://bitalexis.com/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en/contacts"/>
+  </url>
+
+  <url>
+    <loc>https://bitalexis.com/en/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://bitalexis.com/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en/contacts"/>
+  </url>
+
+  <url>
+    <loc>https://bitalexis.com/de/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://bitalexis.com/ru/contacts"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://bitalexis.com/ua/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bitalexis.com/en/contacts"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bitalexis.com/de/contacts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bitalexis.com/en/contacts"/>
   </url>
 
 </urlset>

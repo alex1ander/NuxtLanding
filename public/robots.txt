@@ -1,4 +1,12 @@
 User-agent: *
-Allow: /
+Allow: /ru
+Allow: /ua  
+Allow: /en
+Allow: /de
+Allow: /ru/contacts
+Allow: /ua/contacts
+Allow: /en/contacts
+Allow: /de/contacts
+Disallow: /
 
 Sitemap: https://bitalexis.com/sitemap.xml

@@ -28,7 +28,6 @@ export default defineNuxtPlugin(() => {
               start: `center+=${(index % gridCount) * 50} bottom-=20`,
               end: '+=50 center',
               scrub: true,
-              markers: true
             },
           }
         )

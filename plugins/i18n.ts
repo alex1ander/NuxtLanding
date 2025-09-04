@@ -10,7 +10,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     en: (enJson as any).default ?? enJson,
     ua: (uaJson as any).default ?? uaJson,
     ru: (ruJson as any).default ?? ruJson,
-    de: (ruJson as any).default ?? deJson
+    de: (deJson as any).default ?? deJson
   }
 
   const i18n = createI18n({

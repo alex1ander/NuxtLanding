@@ -68,20 +68,51 @@ locale.value = route.params.lang || 'en'
 const headTitle = computed(() => t('meta.title'))
 const headDescription = computed(() => t('meta.description'))
 
-// Устанавливаем head сразу при инициализации
+// SEO и hreflang настройки
+const currentLang = route.params.lang as string || 'en'
+
 useHead({
   title: headTitle.value,
+  htmlAttrs: {
+    lang: currentLang
+  },
   meta: [
-    { name: 'description', content: headDescription.value }
+    { name: 'description', content: headDescription.value },
+    { property: 'og:title', content: headTitle.value },
+    { property: 'og:description', content: headDescription.value },
+    { property: 'og:url', content: `https://bitalexis.com/${currentLang}` },
+    { property: 'og:image', content: 'https://bitalexis.com/og-image.jpg' },
+    { name: 'twitter:title', content: headTitle.value },
+    { name: 'twitter:description', content: headDescription.value }
+  ],
+  link: [
+    { rel: 'canonical', href: `https://bitalexis.com/${currentLang}` },
+    { rel: 'alternate', hreflang: 'ru', href: 'https://bitalexis.com/ru' },
+    { rel: 'alternate', hreflang: 'uk', href: 'https://bitalexis.com/ua' },
+    { rel: 'alternate', hreflang: 'en', href: 'https://bitalexis.com/en' },
+    { rel: 'alternate', hreflang: 'de', href: 'https://bitalexis.com/de' },
+    { rel: 'alternate', hreflang: 'x-default', href: 'https://bitalexis.com/en' }
   ]
 })
 
 // Следим за изменением языка и обновляем head динамически
-watch(locale, () => {
+watch([locale, headTitle, headDescription], ([newLocale, newTitle, newDesc]) => {
+  const lang = route.params.lang as string || 'en'
   useHead({
-    title: t('meta.title'),
+    title: newTitle,
+    htmlAttrs: {
+      lang: lang
+    },
     meta: [
-      { name: 'description', content: t('meta.description') }
+      { name: 'description', content: newDesc },
+      { property: 'og:title', content: newTitle },
+      { property: 'og:description', content: newDesc },
+      { property: 'og:url', content: `https://bitalexis.com/${lang}` },
+      { name: 'twitter:title', content: newTitle },
+      { name: 'twitter:description', content: newDesc }
+    ],
+    link: [
+      { rel: 'canonical', href: `https://bitalexis.com/${lang}` }
     ]
   })
 })
