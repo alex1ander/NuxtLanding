@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
@@ -108,6 +108,9 @@ const wantsComment = ref(false)
 const currentTypeValue = ref('tel')
 
 // Дропдаун
+const dropdownRef = ref<HTMLElement | null>(null)
+const isDropdownActive = ref(false)
+
 const contactTypes = computed(() => [
   { value: 'email', label: 'Email' },
   { value: 'tel', label: t('phone') },
@@ -115,7 +118,6 @@ const contactTypes = computed(() => [
   { value: 'whatsapp', label: 'WhatsApp' }
 ])
 const currentType = computed(() => contactTypes.value.find(c => c.value === currentTypeValue.value) || contactTypes.value[0])
-const isDropdownActive = ref(false)
 
 // Сообщения и загрузка
 const loading = ref(false)
@@ -128,18 +130,37 @@ function selectType(type: { value: string; label: string }) {
   isDropdownActive.value = false
   clearMessage()
 }
+
 function toggleDropdown() {
   isDropdownActive.value = !isDropdownActive.value
 }
+
 function clearMessage() {
   message.value = { text: '', type: '' }
 }
+
+// Закрытие дропдауна по клику вне
+function handleClickOutside(event: MouseEvent) {
+  const target = event.target as Node
+  if (dropdownRef.value && !dropdownRef.value.contains(target)) {
+    isDropdownActive.value = false
+  }
+}
+
+onMounted(() => {
+  nextTick(() => {
+    document.addEventListener('click', handleClickOutside, true) // capture phase
+  })
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside, true)
+})
 
 // Отправка формы
 async function handleSubmit() {
   clearMessage()
 
-  // Проверка honeypot
   if (honeypot.value.trim() !== '') return console.warn('Spam detected')
 
   loading.value = true
@@ -150,10 +171,9 @@ async function handleSubmit() {
       contactValue: contactValue.value,
       service: localService.value,
       comment: wantsComment.value ? comment.value.trim() : '',
-      lang: locale.value   // <-- добавляем язык
+      lang: locale.value
     }
 
-    // POST-запрос на API Nuxt 3
     const res = await $fetch('/api/sendForm', {
       method: 'POST',
       body: payload
@@ -170,15 +190,24 @@ async function handleSubmit() {
       message.value = { text: t('formMessageErrorSend') || 'Ошибка отправки', type: 'error' }
     }
 
+    // Убираем сообщение через 5 секунд
+    setTimeout(() => {
+      clearMessage()
+    }, 5000)
+
   } catch (err) {
     console.error(err)
     message.value = { text: t('formMessageErrorServer') || 'Ошибка сервера', type: 'error' }
+
+    setTimeout(() => {
+      clearMessage()
+    }, 5000)
   } finally {
     loading.value = false
   }
 }
-</script>
 
+</script>
 
 <style scoped>
 .form-message {
@@ -200,8 +229,6 @@ async function handleSubmit() {
   align-self: start;
   gap: 20px;
 }
-
-
 
 .wrapper-checbox-input {
   position: relative;
@@ -234,17 +261,14 @@ async function handleSubmit() {
   z-index: 1;
 }
 
-/* Ховер эффекты */
 .wrapper-checbox-input:hover .custom-checkbox {
   border-color: rgb(62, 176, 212)
 }
 
-/* Состояние checked */
 .checkbox-native:checked + .custom-checkbox {
   border-color: rgb(62, 176, 212)
 }
 
-/* Галочка */
 .custom-checkbox::after {
   content: "";
   position: absolute;
@@ -259,12 +283,8 @@ async function handleSubmit() {
   transition: all 0.4s ease;
 }
 
-/* Показываем галочку, если checked */
 .checkbox-native:checked + .custom-checkbox::after {
   opacity: 1;
   transform: rotate(45deg) scale(1);
 }
-
-
 </style>
-
