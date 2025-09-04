@@ -16,7 +16,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    locale: 'ua',
+    locale: 'en', // Начальный язык, будет переопределен в компонентах
     fallbackLocale: 'en',
     messages,
   })

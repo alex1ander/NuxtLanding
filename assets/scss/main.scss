@@ -366,7 +366,7 @@ $sizeCirlce: 5px;
     }
 }
 
-@media (max-width: 500px){
+@media (max-width: 768px){
     .footer-container{
         .place-for-logo{
             align-self: center!important;
@@ -649,12 +649,12 @@ $sizeCirlce: 5px;
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
     .mobile {
         display: none!important;
     }
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .desktop {
         display: none!important;
     }

@@ -61,15 +61,26 @@ function handleOpenContactForm(serviceName: string) {
   popupVisible.value = true
 }
 
-// Устанавливаем язык из URL один раз
-locale.value = route.params.lang || 'en'
+// Устанавливаем язык из URL
+const currentLangParam = route.params.lang as string
+const supportedLangs = ['ru', 'ua', 'en', 'de']
+
+if (currentLangParam && supportedLangs.includes(currentLangParam)) {
+  locale.value = currentLangParam
+  // Обновляем HTML lang атрибут
+  if (process.client) {
+    document.documentElement.lang = currentLangParam
+    localStorage.setItem('lang', currentLangParam)
+  }
+}
+
+const currentLang = currentLangParam || 'en'
 
 // Заголовок и описание для head
 const headTitle = computed(() => t('meta.title'))
 const headDescription = computed(() => t('meta.description'))
 
-// SEO и hreflang настройки
-const currentLang = route.params.lang as string || 'en'
+// SEO и hreflang настройки уже используют currentLang из setLanguageFromRoute
 
 useHead({
   title: headTitle.value,
@@ -88,11 +99,22 @@ useHead({
   link: [
     { rel: 'canonical', href: `https://bitalexis.com/${currentLang}` },
     { rel: 'alternate', hreflang: 'ru', href: 'https://bitalexis.com/ru' },
-    { rel: 'alternate', hreflang: 'uk', href: 'https://bitalexis.com/ua' },
+    { rel: 'alternate', hreflang: 'ua', href: 'https://bitalexis.com/ua' },
     { rel: 'alternate', hreflang: 'en', href: 'https://bitalexis.com/en' },
     { rel: 'alternate', hreflang: 'de', href: 'https://bitalexis.com/de' },
-    { rel: 'alternate', hreflang: 'x-default', href: 'https://bitalexis.com/en' }
+    { rel: 'alternate', hreflang: 'x-default', href: 'https://bitalexis.com/ru' }
   ]
+})
+
+// Следим за изменением маршрута и языка
+watch(() => route.params.lang, (newLang) => {
+  if (newLang && supportedLangs.includes(newLang as string)) {
+    locale.value = newLang as string
+    if (process.client) {
+      document.documentElement.lang = newLang as string
+      localStorage.setItem('lang', newLang as string)
+    }
+  }
 })
 
 // Следим за изменением языка и обновляем head динамически
@@ -112,7 +134,12 @@ watch([locale, headTitle, headDescription], ([newLocale, newTitle, newDesc]) => 
       { name: 'twitter:description', content: newDesc }
     ],
     link: [
-      { rel: 'canonical', href: `https://bitalexis.com/${lang}` }
+      { rel: 'canonical', href: `https://bitalexis.com/${lang}` },
+      { rel: 'alternate', hreflang: 'ru', href: 'https://bitalexis.com/ru' },
+      { rel: 'alternate', hreflang: 'ua', href: 'https://bitalexis.com/ua' },
+      { rel: 'alternate', hreflang: 'en', href: 'https://bitalexis.com/en' },
+      { rel: 'alternate', hreflang: 'de', href: 'https://bitalexis.com/de' },
+      { rel: 'alternate', hreflang: 'x-default', href: 'https://bitalexis.com/ru' }
     ]
   })
 })
@@ -120,5 +147,10 @@ watch([locale, headTitle, headDescription], ([newLocale, newTitle, newDesc]) => 
 onMounted(() => {
   $smoothScroll.initAnchorLinks()
   $initAnimations()
+  
+  // Отладочная информация
+  console.log('Current route params:', route.params)
+  console.log('Current locale:', locale.value)
+  console.log('Current lang from URL:', route.params.lang)
 })
 </script>

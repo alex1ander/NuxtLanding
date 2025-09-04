@@ -18,7 +18,9 @@
                 </div>
                 <div class="content content-header mobile">
                     <div class="content-header-part">
-                        <LogoText />
+                        <div class="place-for-logo mobile">
+                            <LogoText />
+                        </div>
                     </div>
 
                     <div class="content-header-part">
@@ -158,6 +160,10 @@ header{
 
             .place-for-logo{
                 margin: 0 50px;
+
+                &.mobile{
+                    margin: 0;
+                }
             }
         }
     }

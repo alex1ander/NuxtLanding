@@ -53,7 +53,7 @@ const headTitle = computed(() => t('contactTitle'))
 const headDescription = computed(() => t('contactIntro'))
 
 // SEO и hreflang настройки
-const currentLang = route.params.lang as string || 'en'
+const currentLang = currentLangParam || 'en'
 
 // Устанавливаем начальный head
 useHead({
@@ -113,11 +113,23 @@ function handleOpenContactForm(serviceName: string) {
 }
 
 // Устанавливаем язык из URL
-locale.value = route.params.lang || 'en'
+const currentLangParam = route.params.lang as string
+if (currentLangParam && ['ru', 'ua', 'en', 'de'].includes(currentLangParam)) {
+  locale.value = currentLangParam
+  // Обновляем HTML lang атрибут
+  if (process.client) {
+    document.documentElement.lang = currentLangParam
+  }
+}
 
 // Следим за изменением языка в URL
 watch(() => route.params.lang, (newLang) => {
-  if (newLang) locale.value = newLang
+  if (newLang && ['ru', 'ua', 'en', 'de'].includes(newLang as string)) {
+    locale.value = newLang as string
+    if (process.client) {
+      document.documentElement.lang = newLang as string
+    }
+  }
 })
 
 onMounted(() => {
