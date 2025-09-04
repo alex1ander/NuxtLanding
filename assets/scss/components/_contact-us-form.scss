@@ -215,3 +215,18 @@
         }
     }
 }
+
+@media (max-width: 500px) {
+    .wrapper-input{
+
+        .dropdown-list {
+            transition: transform 0.4s ease;
+        }
+        &:has(input:focus){
+            .dropdown-list{
+                transform: translateY(-32px);
+            }
+        }
+        
+    }
+}

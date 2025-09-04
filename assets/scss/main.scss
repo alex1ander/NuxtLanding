@@ -12,7 +12,7 @@
 @use 'components/svg-animation';
 
 
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+// Шрифты теперь предзагружаются через nuxt.config.ts для лучшей производительности
 *{
     margin: 0;
     padding: 0;
@@ -672,7 +672,11 @@ $sizeCirlce: 5px;
 @media (max-width: 768px) {
     .btn-backarea.mobile-circle{
         padding: 8px;
-        border-radius: 100%;
+        aspect-ratio: 1;
+        &.dropdown-head{
+            border-radius: 100%; 
+        }
+
         .lang-code{
             display: none;
         }
