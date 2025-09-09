@@ -52,9 +52,72 @@
 
         <!-- Поля ввода контакта -->
         <input v-if="currentType.value === 'email'" name="email" type="email" v-model="contactValue" placeholder="example@example.com" required />
-        <input v-else-if="currentType.value === 'tel'" name="phone" type="tel" v-model="contactValue" :placeholder="t('formPlaceholderType')" required />
+        
+        <!-- Поле телефона с селектором кода страны -->
+        <div v-else-if="currentType.value === 'tel'" class="phone-input-wrapper">
+          <div class="country-selector" ref="countryDropdownTelRef" :class="{ active: isCountryDropdownActive }">
+            <div class="country-selector-head" @click="toggleCountryDropdown">
+              <span class="country-flag">{{ currentCountry.flag }}</span>
+              <span class="country-code">{{ currentCountry.code }}</span>
+              <svg width="12" height="12" class="dropdown-arrow">
+                <path d="M6 8L2 4h8z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="country-selector-body" @click.stop>
+              <ul class="country-list">
+                <li
+                  v-for="country in countries"
+                  :key="country.code"
+                  :class="{ active: country.code === selectedCountryCode }"
+                  @click.stop="selectCountry(country)"
+                  class="cursor-hover country-item"
+                >
+                  <span class="country-flag">{{ country.flag }}</span>
+                  <span class="country-name">{{ country.name }}</span>
+                  <span class="country-code">{{ country.code }}</span>
+                  <svg v-if="country.code === selectedCountryCode" width="16" height="16" class="sprite-svg-fill">
+                    <use href="#check"></use>
+                  </svg>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <input name="phone" type="tel" v-model="contactValue" :placeholder="selectedCountryCode + ' ' + t('formPlaceholderType')" required />
+        </div>
+        
         <input v-else-if="currentType.value === 'tg'" name="telegram" type="text" v-model="contactValue" placeholder="@telegram_username" required />
-        <input v-else-if="currentType.value === 'whatsapp'" name="whatsapp" type="tel" v-model="contactValue" :placeholder="t('formPlaceholderType')" required />
+        
+        <!-- Поле WhatsApp с селектором кода страны -->
+        <div v-else-if="currentType.value === 'whatsapp'" class="phone-input-wrapper">
+          <div class="country-selector" ref="countryDropdownWhatsappRef" :class="{ active: isCountryDropdownActive }">
+            <div class="country-selector-head" @click="toggleCountryDropdown">
+              <span class="country-flag">{{ currentCountry.flag }}</span>
+              <span class="country-code">{{ currentCountry.code }}</span>
+              <svg width="12" height="12" class="dropdown-arrow">
+                <path d="M6 8L2 4h8z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="country-selector-body" @click.stop>
+              <ul class="country-list">
+                <li
+                  v-for="country in countries"
+                  :key="country.code"
+                  :class="{ active: country.code === selectedCountryCode }"
+                  @click.stop="selectCountry(country)"
+                  class="cursor-hover country-item"
+                >
+                  <span class="country-flag">{{ country.flag }}</span>
+                  <span class="country-name">{{ country.name }}</span>
+                  <span class="country-code">{{ country.code }}</span>
+                  <svg v-if="country.code === selectedCountryCode" width="16" height="16" class="sprite-svg-fill">
+                    <use href="#check"></use>
+                  </svg>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <input name="whatsapp" type="tel" v-model="contactValue" :placeholder="selectedCountryCode + ' ' + t('formPlaceholderType')" required />
+        </div>
       </div>
     </div>
 
@@ -93,7 +156,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
@@ -107,9 +170,49 @@ const honeypot = ref('')
 const wantsComment = ref(false)
 const currentTypeValue = ref('tel')
 
-// Дропдаун
+// Дропдауны
 const dropdownRef = ref<HTMLElement | null>(null)
+const countryDropdownTelRef = ref<HTMLElement | null>(null)
+const countryDropdownWhatsappRef = ref<HTMLElement | null>(null)
 const isDropdownActive = ref(false)
+const isCountryDropdownActive = ref(false)
+
+// Коды стран
+const selectedCountryCode = ref('+380')
+
+// Список стран с кодами
+const countries = [
+  { code: '+380', name: 'Украина', flag: '🇺🇦' },
+  { code: '+7', name: 'Россия', flag: '🇷🇺' },
+  { code: '+1', name: 'США', flag: '🇺🇸' },
+  { code: '+44', name: 'Великобритания', flag: '🇬🇧' },
+  { code: '+49', name: 'Германия', flag: '🇩🇪' },
+  { code: '+33', name: 'Франция', flag: '🇫🇷' },
+  { code: '+39', name: 'Италия', flag: '🇮🇹' },
+  { code: '+34', name: 'Испания', flag: '🇪🇸' },
+  { code: '+31', name: 'Нидерланды', flag: '🇳🇱' },
+  { code: '+48', name: 'Польша', flag: '🇵🇱' },
+  { code: '+420', name: 'Чехия', flag: '🇨🇿' },
+  { code: '+421', name: 'Словакия', flag: '🇸🇰' },
+  { code: '+36', name: 'Венгрия', flag: '🇭🇺' },
+  { code: '+40', name: 'Румыния', flag: '🇷🇴' },
+  { code: '+359', name: 'Болгария', flag: '🇧🇬' },
+  { code: '+30', name: 'Греция', flag: '🇬🇷' },
+  { code: '+90', name: 'Турция', flag: '🇹🇷' },
+  { code: '+86', name: 'Китай', flag: '🇨🇳' },
+  { code: '+81', name: 'Япония', flag: '🇯🇵' },
+  { code: '+82', name: 'Южная Корея', flag: '🇰🇷' },
+  { code: '+91', name: 'Индия', flag: '🇮🇳' },
+  { code: '+55', name: 'Бразилия', flag: '🇧🇷' },
+  { code: '+52', name: 'Мексика', flag: '🇲🇽' },
+  { code: '+61', name: 'Австралия', flag: '🇦🇺' },
+  { code: '+64', name: 'Новая Зеландия', flag: '🇳🇿' },
+  { code: '+27', name: 'ЮАР', flag: '🇿🇦' },
+  { code: '+20', name: 'Египет', flag: '🇪🇬' },
+  { code: '+971', name: 'ОАЭ', flag: '🇦🇪' },
+  { code: '+966', name: 'Саудовская Аравия', flag: '🇸🇦' },
+  { code: '+972', name: 'Израиль', flag: '🇮🇱' }
+]
 
 const contactTypes = computed(() => [
   { value: 'email', label: 'Email' },
@@ -123,27 +226,81 @@ const currentType = computed(() => contactTypes.value.find(c => c.value === curr
 const loading = ref(false)
 const message = ref({ text: '', type: '' })
 
+// Вычисляемое свойство для текущей страны
+const currentCountry = computed(() => {
+  return countries.find(c => c.code === selectedCountryCode.value) || countries[0]
+})
+
 // Дропдаун функции
 function selectType(type: { value: string; label: string }) {
   currentTypeValue.value = type.value
   contactValue.value = ''
   isDropdownActive.value = false
   clearMessage()
+  
+  // Если выбран tel или whatsapp, добавляем код страны
+  if (type.value === 'tel' || type.value === 'whatsapp') {
+    contactValue.value = selectedCountryCode.value + ' '
+  }
 }
 
 function toggleDropdown() {
   isDropdownActive.value = !isDropdownActive.value
 }
 
+function toggleCountryDropdown() {
+  isCountryDropdownActive.value = !isCountryDropdownActive.value
+}
+
+function selectCountry(country: { code: string; name: string; flag: string }) {
+  selectedCountryCode.value = country.code
+  isCountryDropdownActive.value = false
+  
+  // Обновляем поле ввода с новым кодом страны
+  if (currentTypeValue.value === 'tel' || currentTypeValue.value === 'whatsapp') {
+    const phoneNumber = contactValue.value.replace(/^\+\d+\s*/, '').trim()
+    contactValue.value = country.code + (phoneNumber ? ' ' + phoneNumber : ' ')
+  }
+}
+
 function clearMessage() {
   message.value = { text: '', type: '' }
 }
 
-// Закрытие дропдауна по клику вне
+// Watcher для автоматического определения кода страны из введенного номера
+watch(contactValue, (newValue) => {
+  if ((currentTypeValue.value === 'tel' || currentTypeValue.value === 'whatsapp') && newValue) {
+    // Ищем код страны в начале строки
+    const match = newValue.match(/^\+(\d+)/)
+    if (match) {
+      const inputCode = '+' + match[1]
+      // Ищем точное совпадение кода или код, который является началом введенного
+      const foundCountry = countries.find(country => {
+        return inputCode.startsWith(country.code) || country.code.startsWith(inputCode)
+      })
+      
+      if (foundCountry && foundCountry.code !== selectedCountryCode.value) {
+        selectedCountryCode.value = foundCountry.code
+      }
+    }
+  }
+})
+
+// Закрытие дропдаунов по клику вне
 function handleClickOutside(event: MouseEvent) {
   const target = event.target as Node
   if (dropdownRef.value && !dropdownRef.value.contains(target)) {
     isDropdownActive.value = false
+  }
+  
+  // Проверяем, не кликнули ли мы внутри любого из селекторов страны
+  const isInsideCountrySelector = (
+    (countryDropdownTelRef.value && countryDropdownTelRef.value.contains(target)) ||
+    (countryDropdownWhatsappRef.value && countryDropdownWhatsappRef.value.contains(target))
+  )
+  
+  if (!isInsideCountrySelector) {
+    isCountryDropdownActive.value = false
   }
 }
 
@@ -286,5 +443,181 @@ async function handleSubmit() {
 .checkbox-native:checked + .custom-checkbox::after {
   opacity: 1;
   transform: rotate(45deg) scale(1);
+}
+
+/* Стили для селектора кода страны */
+.phone-input-wrapper {
+  display: flex;
+  gap: 0;
+  width: 100%;
+}
+
+.country-selector {
+  position: relative;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: #fff;
+  z-index: 10;
+}
+
+.country-selector.active {
+  border-color: rgb(62, 176, 212);
+  z-index: 20;
+}
+
+.country-selector-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 10px;
+  cursor: pointer;
+  min-width: 80px;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.country-selector-head:hover {
+  background-color: #f8f9fa;
+}
+
+.country-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.country-code {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+  color: #666;
+  margin-left: auto;
+}
+
+.country-selector.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.country-selector-body {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  background: #fff;
+  border: 1px solid rgb(62, 176, 212);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.country-selector.active .country-selector-body {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.country-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.country-item:last-child {
+  border-bottom: none;
+}
+
+.country-item:hover {
+  background-color: #f8f9fa;
+}
+
+.country-item.active {
+  background-color: rgba(62, 176, 212, 0.1);
+  color: rgb(62, 176, 212);
+}
+
+.country-item .country-name {
+  flex: 1;
+  font-size: 14px;
+}
+
+.country-item .country-code {
+  font-size: 13px;
+  color: #666;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.country-item.active .country-code {
+  color: rgb(62, 176, 212);
+}
+
+.country-item .sprite-svg-fill {
+  flex-shrink: 0;
+  color: rgb(62, 176, 212);
+}
+
+/* Адаптация поля ввода для работы с селектором */
+.phone-input-wrapper input[type="tel"] {
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+  flex: 1;
+}
+
+.phone-input-wrapper input[type="tel"]:focus {
+  border-left: 1px solid rgb(62, 176, 212);
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 768px) {
+  .country-selector-head {
+    padding: 10px 8px;
+    min-width: 70px;
+  }
+  
+  .country-flag {
+    font-size: 14px;
+  }
+  
+  .country-code {
+    font-size: 12px;
+  }
+  
+  .country-selector-body {
+    max-height: 150px;
+  }
+  
+  .country-item {
+    padding: 8px 10px;
+  }
+  
+  .country-item .country-name {
+    font-size: 13px;
+  }
+  
+  .country-item .country-code {
+    font-size: 12px;
+  }
 }
 </style>
