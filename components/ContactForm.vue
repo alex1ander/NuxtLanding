@@ -64,9 +64,30 @@
               </svg>
             </div>
             <div class="country-selector-body" @click.stop>
+              <!-- Поле поиска -->
+              <div class="country-search">
+                <input
+                  type="text"
+                  v-model="countrySearchQuery"
+                  class="country-search-input"
+                  :placeholder="t('searchCountry') || 'Поиск страны...'"
+                  @click.stop
+                />
+                <svg v-if="countrySearchQuery" @click="clearCountrySearch" class="clear-search-icon" width="16" height="16">
+                  <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM11.5 10.1L10.1 11.5 8 9.4 5.9 11.5 4.5 10.1 6.6 8 4.5 5.9 5.9 4.5 8 6.6 10.1 4.5 11.5 5.9 9.4 8l2.1 2.1z" fill="currentColor"/>
+                </svg>
+                <svg v-else class="search-icon" width="16" height="16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="currentColor"/>
+                </svg>
+              </div>
+              
+              <!-- Список стран -->
               <ul class="country-list">
+                <li v-if="filteredCountries.length === 0" class="no-results">
+                  {{ t('noCountriesFound') || 'Страны не найдены' }}
+                </li>
                 <li
-                  v-for="country in countries"
+                  v-for="country in filteredCountries"
                   :key="country.code"
                   :class="{ active: country.code === selectedCountryCode }"
                   @click.stop="selectCountry(country)"
@@ -82,7 +103,7 @@
               </ul>
             </div>
           </div>
-          <input name="phone" type="tel" v-model="contactValue" :placeholder="selectedCountryCode + ' ' + t('formPlaceholderType')" required />
+          <input name="phone" type="tel" v-model="contactValue" @input="handlePhoneInput" :placeholder="'+' + t('formPlaceholderType')" required />
         </div>
         
         <input v-else-if="currentType.value === 'tg'" name="telegram" type="text" v-model="contactValue" placeholder="@telegram_username" required />
@@ -98,9 +119,30 @@
               </svg>
             </div>
             <div class="country-selector-body" @click.stop>
+              <!-- Поле поиска -->
+              <div class="country-search">
+                <input
+                  type="text"
+                  v-model="countrySearchQuery"
+                  class="country-search-input"
+                  :placeholder="t('searchCountry') || 'Поиск страны...'"
+                  @click.stop
+                />
+                <svg v-if="countrySearchQuery" @click="clearCountrySearch" class="clear-search-icon" width="16" height="16">
+                  <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM11.5 10.1L10.1 11.5 8 9.4 5.9 11.5 4.5 10.1 6.6 8 4.5 5.9 5.9 4.5 8 6.6 10.1 4.5 11.5 5.9 9.4 8l2.1 2.1z" fill="currentColor"/>
+                </svg>
+                <svg v-else class="search-icon" width="16" height="16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="currentColor"/>
+                </svg>
+              </div>
+              
+              <!-- Список стран -->
               <ul class="country-list">
+                <li v-if="filteredCountries.length === 0" class="no-results">
+                  {{ t('noCountriesFound') || 'Страны не найдены' }}
+                </li>
                 <li
-                  v-for="country in countries"
+                  v-for="country in filteredCountries"
                   :key="country.code"
                   :class="{ active: country.code === selectedCountryCode }"
                   @click.stop="selectCountry(country)"
@@ -116,7 +158,7 @@
               </ul>
             </div>
           </div>
-          <input name="whatsapp" type="tel" v-model="contactValue" :placeholder="selectedCountryCode + ' ' + t('formPlaceholderType')" required />
+          <input name="whatsapp" type="tel" v-model="contactValue" @input="handlePhoneInput" :placeholder="'+' + t('formPlaceholderType')" required />
         </div>
       </div>
     </div>
@@ -180,39 +222,69 @@ const isCountryDropdownActive = ref(false)
 // Коды стран
 const selectedCountryCode = ref('+380')
 
-// Список стран с кодами
-const countries = [
-  { code: '+380', name: 'Украина', flag: '🇺🇦' },
-  { code: '+7', name: 'Россия', flag: '🇷🇺' },
-  { code: '+1', name: 'США', flag: '🇺🇸' },
-  { code: '+44', name: 'Великобритания', flag: '🇬🇧' },
-  { code: '+49', name: 'Германия', flag: '🇩🇪' },
-  { code: '+33', name: 'Франция', flag: '🇫🇷' },
-  { code: '+39', name: 'Италия', flag: '🇮🇹' },
-  { code: '+34', name: 'Испания', flag: '🇪🇸' },
-  { code: '+31', name: 'Нидерланды', flag: '🇳🇱' },
-  { code: '+48', name: 'Польша', flag: '🇵🇱' },
-  { code: '+420', name: 'Чехия', flag: '🇨🇿' },
-  { code: '+421', name: 'Словакия', flag: '🇸🇰' },
-  { code: '+36', name: 'Венгрия', flag: '🇭🇺' },
-  { code: '+40', name: 'Румыния', flag: '🇷🇴' },
-  { code: '+359', name: 'Болгария', flag: '🇧🇬' },
-  { code: '+30', name: 'Греция', flag: '🇬🇷' },
-  { code: '+90', name: 'Турция', flag: '🇹🇷' },
-  { code: '+86', name: 'Китай', flag: '🇨🇳' },
-  { code: '+81', name: 'Япония', flag: '🇯🇵' },
-  { code: '+82', name: 'Южная Корея', flag: '🇰🇷' },
-  { code: '+91', name: 'Индия', flag: '🇮🇳' },
-  { code: '+55', name: 'Бразилия', flag: '🇧🇷' },
-  { code: '+52', name: 'Мексика', flag: '🇲🇽' },
-  { code: '+61', name: 'Австралия', flag: '🇦🇺' },
-  { code: '+64', name: 'Новая Зеландия', flag: '🇳🇿' },
-  { code: '+27', name: 'ЮАР', flag: '🇿🇦' },
-  { code: '+20', name: 'Египет', flag: '🇪🇬' },
-  { code: '+971', name: 'ОАЭ', flag: '🇦🇪' },
-  { code: '+966', name: 'Саудовская Аравия', flag: '🇸🇦' },
-  { code: '+972', name: 'Израиль', flag: '🇮🇱' }
+// Список стран с кодами и мультиязычными названиями
+const countriesData = [
+  { code: '+380', names: { ru: 'Украина', en: 'Ukraine', de: 'Ukraine', ua: 'Україна' }, flag: '🇺🇦' },
+  // { code: '+7', names: { ru: 'Россия', en: 'Russia', de: 'Russland', ua: 'Росія' }, flag: '🇷🇺' },
+  { code: '+1', names: { ru: 'США', en: 'United States', de: 'USA', ua: 'США' }, flag: '🇺🇸' },
+  { code: '+44', names: { ru: 'Великобритания', en: 'United Kingdom', de: 'Vereinigtes Königreich', ua: 'Великобританія' }, flag: '🇬🇧' },
+  { code: '+49', names: { ru: 'Германия', en: 'Germany', de: 'Deutschland', ua: 'Німеччина' }, flag: '🇩🇪' },
+  { code: '+33', names: { ru: 'Франция', en: 'France', de: 'Frankreich', ua: 'Франція' }, flag: '🇫🇷' },
+  { code: '+39', names: { ru: 'Италия', en: 'Italy', de: 'Italien', ua: 'Італія' }, flag: '🇮🇹' },
+  { code: '+34', names: { ru: 'Испания', en: 'Spain', de: 'Spanien', ua: 'Іспанія' }, flag: '🇪🇸' },
+  { code: '+31', names: { ru: 'Нидерланды', en: 'Netherlands', de: 'Niederlande', ua: 'Нідерланди' }, flag: '🇳🇱' },
+  { code: '+48', names: { ru: 'Польша', en: 'Poland', de: 'Polen', ua: 'Польща' }, flag: '🇵🇱' },
+  { code: '+420', names: { ru: 'Чехия', en: 'Czech Republic', de: 'Tschechien', ua: 'Чехія' }, flag: '🇨🇿' },
+  { code: '+421', names: { ru: 'Словакия', en: 'Slovakia', de: 'Slowakei', ua: 'Словаччина' }, flag: '🇸🇰' },
+  { code: '+36', names: { ru: 'Венгрия', en: 'Hungary', de: 'Ungarn', ua: 'Угорщина' }, flag: '🇭🇺' },
+  { code: '+40', names: { ru: 'Румыния', en: 'Romania', de: 'Rumänien', ua: 'Румунія' }, flag: '🇷🇴' },
+  { code: '+359', names: { ru: 'Болгария', en: 'Bulgaria', de: 'Bulgarien', ua: 'Болгарія' }, flag: '🇧🇬' },
+  { code: '+30', names: { ru: 'Греция', en: 'Greece', de: 'Griechenland', ua: 'Греція' }, flag: '🇬🇷' },
+  { code: '+90', names: { ru: 'Турция', en: 'Turkey', de: 'Türkei', ua: 'Туреччина' }, flag: '🇹🇷' },
+  { code: '+86', names: { ru: 'Китай', en: 'China', de: 'China', ua: 'Китай' }, flag: '🇨🇳' },
+  { code: '+81', names: { ru: 'Япония', en: 'Japan', de: 'Japan', ua: 'Японія' }, flag: '🇯🇵' },
+  { code: '+82', names: { ru: 'Южная Корея', en: 'South Korea', de: 'Südkorea', ua: 'Південна Корея' }, flag: '🇰🇷' },
+  { code: '+91', names: { ru: 'Индия', en: 'India', de: 'Indien', ua: 'Індія' }, flag: '🇮🇳' },
+  { code: '+55', names: { ru: 'Бразилия', en: 'Brazil', de: 'Brasilien', ua: 'Бразилія' }, flag: '🇧🇷' },
+  { code: '+52', names: { ru: 'Мексика', en: 'Mexico', de: 'Mexiko', ua: 'Мексика' }, flag: '🇲🇽' },
+  { code: '+61', names: { ru: 'Австралия', en: 'Australia', de: 'Australien', ua: 'Австралія' }, flag: '🇦🇺' },
+  { code: '+64', names: { ru: 'Новая Зеландия', en: 'New Zealand', de: 'Neuseeland', ua: 'Нова Зеландія' }, flag: '🇳🇿' },
+  { code: '+27', names: { ru: 'ЮАР', en: 'South Africa', de: 'Südafrika', ua: 'ПАР' }, flag: '🇿🇦' },
+  { code: '+20', names: { ru: 'Египет', en: 'Egypt', de: 'Ägypten', ua: 'Єгипет' }, flag: '🇪🇬' },
+  { code: '+971', names: { ru: 'ОАЭ', en: 'UAE', de: 'VAE', ua: 'ОАЕ' }, flag: '🇦🇪' },
+  { code: '+966', names: { ru: 'Саудовская Аравия', en: 'Saudi Arabia', de: 'Saudi-Arabien', ua: 'Саудівська Аравія' }, flag: '🇸🇦' },
+  { code: '+972', names: { ru: 'Израиль', en: 'Israel', de: 'Israel', ua: 'Ізраїль' }, flag: '🇮🇱' }
 ]
+
+// Поиск по странам
+const countrySearchQuery = ref('')
+
+// Вычисляемое свойство для стран с локализованными названиями
+const countries = computed(() => {
+  return countriesData.map(country => ({
+    ...country,
+    name: country.names[locale.value as keyof typeof country.names] || country.names.en
+  }))
+})
+
+// Отфильтрованные страны для поиска
+const filteredCountries = computed(() => {
+  if (!countrySearchQuery.value.trim()) {
+    return countries.value
+  }
+  
+  const query = countrySearchQuery.value.toLowerCase().trim()
+  return countries.value.filter(country => {
+    // Поиск по названию на текущем языке
+    const currentName = country.name.toLowerCase()
+    // Поиск по коду страны
+    const code = country.code.toLowerCase()
+    // Поиск по всем переводам
+    const allNames = Object.values(country.names).join(' ').toLowerCase()
+    
+    return currentName.includes(query) || code.includes(query) || allNames.includes(query)
+  })
+})
 
 const contactTypes = computed(() => [
   { value: 'email', label: 'Email' },
@@ -228,7 +300,7 @@ const message = ref({ text: '', type: '' })
 
 // Вычисляемое свойство для текущей страны
 const currentCountry = computed(() => {
-  return countries.find(c => c.code === selectedCountryCode.value) || countries[0]
+  return countries.value.find(c => c.code === selectedCountryCode.value) || countries.value[0]
 })
 
 // Дропдаун функции
@@ -238,9 +310,9 @@ function selectType(type: { value: string; label: string }) {
   isDropdownActive.value = false
   clearMessage()
   
-  // Если выбран tel или whatsapp, добавляем код страны
+  // Если выбран tel или whatsapp, начинаем с +
   if (type.value === 'tel' || type.value === 'whatsapp') {
-    contactValue.value = selectedCountryCode.value + ' '
+    contactValue.value = '+'
   }
 }
 
@@ -250,16 +322,32 @@ function toggleDropdown() {
 
 function toggleCountryDropdown() {
   isCountryDropdownActive.value = !isCountryDropdownActive.value
+  if (isCountryDropdownActive.value) {
+    // Очищаем поиск при открытии
+    countrySearchQuery.value = ''
+    // Фокусируемся на поле поиска
+    nextTick(() => {
+      const searchInput = document.querySelector('.country-search-input') as HTMLInputElement
+      if (searchInput) {
+        searchInput.focus()
+      }
+    })
+  }
+}
+
+function clearCountrySearch() {
+  countrySearchQuery.value = ''
 }
 
 function selectCountry(country: { code: string; name: string; flag: string }) {
   selectedCountryCode.value = country.code
   isCountryDropdownActive.value = false
+  countrySearchQuery.value = '' // Очищаем поиск при выборе
   
   // Обновляем поле ввода с новым кодом страны
   if (currentTypeValue.value === 'tel' || currentTypeValue.value === 'whatsapp') {
-    const phoneNumber = contactValue.value.replace(/^\+\d+\s*/, '').trim()
-    contactValue.value = country.code + (phoneNumber ? ' ' + phoneNumber : ' ')
+    const phoneNumber = contactValue.value.replace(/^\+\d*/, '').trim()
+    contactValue.value = country.code + (phoneNumber ? phoneNumber : '')
   }
 }
 
@@ -267,15 +355,54 @@ function clearMessage() {
   message.value = { text: '', type: '' }
 }
 
+// Функция для обработки ввода в поле телефона
+function handlePhoneInput(event: Event) {
+  const target = event.target as HTMLInputElement
+  let value = target.value
+  
+  // Удаляем все нецифровые символы кроме +
+  value = value.replace(/[^\d+]/g, '')
+  
+  // Если поле пустое или пользователь удалил +, добавляем его
+  if (!value || !value.startsWith('+')) {
+    value = '+' + value.replace(/\+/g, '')
+  }
+  
+  // Обновляем значение
+  contactValue.value = value
+  
+  // Определяем код страны
+  if (value.length > 1) {
+    const match = value.match(/^\+(\d+)/)
+    if (match) {
+      const inputCode = '+' + match[1]
+      // Ищем точное совпадение кода или код, который является началом введенного
+      const foundCountry = countries.value.find(country => {
+        return inputCode.startsWith(country.code) || country.code.startsWith(inputCode)
+      })
+      
+      if (foundCountry && foundCountry.code !== selectedCountryCode.value) {
+        selectedCountryCode.value = foundCountry.code
+      }
+    }
+  }
+}
+
 // Watcher для автоматического определения кода страны из введенного номера
 watch(contactValue, (newValue) => {
   if ((currentTypeValue.value === 'tel' || currentTypeValue.value === 'whatsapp') && newValue) {
+    // Убеждаемся что номер начинается с +
+    if (!newValue.startsWith('+')) {
+      contactValue.value = '+' + newValue
+      return
+    }
+    
     // Ищем код страны в начале строки
     const match = newValue.match(/^\+(\d+)/)
     if (match) {
       const inputCode = '+' + match[1]
       // Ищем точное совпадение кода или код, который является началом введенного
-      const foundCountry = countries.find(country => {
+      const foundCountry = countries.value.find(country => {
         return inputCode.startsWith(country.code) || country.code.startsWith(inputCode)
       })
       
@@ -509,17 +636,20 @@ async function handleSubmit() {
   top: 100%;
   left: -1px;
   right: -1px;
+  min-width: 300px;
   background: #fff;
   border: 1px solid rgb(62, 176, 212);
   border-top: none;
   border-radius: 0 0 8px 8px;
-  max-height: 200px;
+  width: max-content;
+  max-width: 100%;
   overflow-y: auto;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .country-selector.active .country-selector-body {
@@ -528,20 +658,73 @@ async function handleSubmit() {
   transform: translateY(0);
 }
 
+/* Стили для поиска стран */
+.country-search {
+  position: relative;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.country-search-input {
+  width: 100%;
+  padding: 8px 35px 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.country-search-input:focus {
+  border-color: rgb(62, 176, 212);
+}
+
+.search-icon, .clear-search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+}
+
+.clear-search-icon {
+  cursor: pointer;
+  pointer-events: auto;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+.clear-search-icon:hover {
+  color: #666;
+}
+
 .country-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.no-results {
+  padding: 16px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
 }
 
 .country-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 12px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
   border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap;
 }
 
 .country-item:last-child {
@@ -560,6 +743,8 @@ async function handleSubmit() {
 .country-item .country-name {
   flex: 1;
   font-size: 14px;
+  min-width: 140px;
+  text-align: left;
 }
 
 .country-item .country-code {
@@ -567,6 +752,8 @@ async function handleSubmit() {
   color: #666;
   margin-left: auto;
   margin-right: 8px;
+  min-width: 50px;
+  text-align: right;
 }
 
 .country-item.active .country-code {
@@ -606,18 +793,40 @@ async function handleSubmit() {
   
   .country-selector-body {
     max-height: 150px;
+    min-width: 260px;
+  }
+  
+  .country-search {
+    padding: 6px 10px;
+  }
+  
+  .country-search-input {
+    padding: 6px 30px 6px 10px;
+    font-size: 13px;
+  }
+  
+  .search-icon, .clear-search-icon {
+    right: 18px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .country-list {
+    max-height: 120px;
   }
   
   .country-item {
-    padding: 8px 10px;
+    padding: 10px 14px;
   }
   
   .country-item .country-name {
     font-size: 13px;
+    min-width: 120px;
   }
   
   .country-item .country-code {
     font-size: 12px;
+    min-width: 45px;
   }
 }
 </style>
