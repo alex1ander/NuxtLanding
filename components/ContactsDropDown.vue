@@ -29,7 +29,7 @@ const dropdown = ref<HTMLElement | null>(null)
 
 const contacts = [
   { key: 'phone1', labelKey: '+49 176 60887834', hrefKey: 'tel:+4917660887834' },
-  { key: 'emailSupport', labelKey: 'BitAlexis@gmail.com', hrefKey: 'mailto:bitalexis@gmail.com' },
+  { key: 'emailSupport', labelKey: 'BitAlexisWeb@gmail.com', hrefKey: 'mailto:BitAlexisWeb@gmail.com' },
   { key: 'phone2', labelKey: '+49 176 12345678', hrefKey: 'tel:+4917612345678' },
 ]
 
