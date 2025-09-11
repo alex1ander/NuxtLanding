@@ -9,7 +9,7 @@
         </svg>
       </div>
       <div class="country-selector-body" @click.stop>
-        <!-- Поле поиска -->
+        <!-- Поле поиска -->1
         <div class="country-search">
           <input
             type="text"
