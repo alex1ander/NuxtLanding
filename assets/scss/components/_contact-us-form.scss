@@ -203,6 +203,11 @@
         border-radius: 25px;
         height: 80%;
 
+
+        &.left{
+            left: 6px;
+            right: auto;
+        }
         .dropdown-head {
             padding: 8px 16px;
             

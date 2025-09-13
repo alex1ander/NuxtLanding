@@ -1,15 +1,14 @@
 <template>
   <div class="phone-input-wrapper">
-    <div class="country-selector" ref="countryDropdownRef" :class="{ active: isCountryDropdownActive }">
-      <div class="country-selector-head" @click="toggleCountryDropdown">
+    <div class="dropdown-list left" ref="countryDropdownRef" :class="{ active: isCountryDropdownActive }">
+      <div class="dropdown-head text-with-svg" @click="toggleCountryDropdown">
         <span class="country-flag">{{ currentCountry.flag }}</span>
-        <span class="country-code">{{ currentCountry.code }}</span>
         <svg width="12" height="12" class="dropdown-arrow">
-          <path d="M6 8L2 4h8z" fill="currentColor"/>
+          <path d="M6 8L2 4h8z" fill="#ffffff"/>
         </svg>
       </div>
-      <div class="country-selector-body" @click.stop>
-        <!-- Поле поиска -->1
+      <div class="dropdown-body" @click.stop>
+        <!-- Поле поиска -->
         <div class="country-search">
           <input
             type="text"
@@ -19,15 +18,15 @@
             @click.stop
           />
           <svg v-if="countrySearchQuery" @click="clearCountrySearch" class="clear-search-icon" width="16" height="16">
-            <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM11.5 10.1L10.1 11.5 8 9.4 5.9 11.5 4.5 10.1 6.6 8 4.5 5.9 5.9 4.5 8 6.6 10.1 4.5 11.5 5.9 9.4 8l2.1 2.1z" fill="currentColor"/>
+            <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM11.5 10.1L10.1 11.5 8 9.4 5.9 11.5 4.5 10.1 6.6 8 4.5 5.9 5.9 4.5 8 6.6 10.1 4.5 11.5 5.9 9.4 8l2.1 2.1z" fill="#ffffff"/>
           </svg>
           <svg v-else class="search-icon" width="16" height="16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="currentColor"/>
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="#ffffff"/>
           </svg>
         </div>
         
         <!-- Список стран -->
-        <ul class="country-list">
+        <ul class="selected-list animated-list">
           <li v-if="filteredCountries.length === 0" class="no-results">
             {{ t('noCountriesFound') || 'Страны не найдены' }}
           </li>
@@ -104,67 +103,67 @@ const countriesData: Country[] = [
   { code: '+380', names: { ru: 'Украина', en: 'Ukraine', de: 'Ukraine', ua: 'Україна' }, flag: '🇺🇦', maxLength: 13, mask: '+380 XX XXX XX XX' },
   { code: '+44', names: { ru: 'Великобритания', en: 'United Kingdom', de: 'Vereinigtes Königreich', ua: 'Великобританія' }, flag: '🇬🇧', maxLength: 13, mask: '+44 XXXX XXX XXX' },
   { code: '+49', names: { ru: 'Германия', en: 'Germany', de: 'Deutschland', ua: 'Німеччина' }, flag: '🇩🇪', maxLength: 14, mask: '+49 XXX XXXX XXXX' },
-  { code: '+33', names: { ru: 'Франция', en: 'France', de: 'Frankreich', ua: 'Франція' }, flag: '🇫🇷', maxLength: 12, mask: '+33 X XX XX XX XX' },
-  { code: '+39', names: { ru: 'Италия', en: 'Italy', de: 'Italien', ua: 'Італія' }, flag: '🇮🇹', maxLength: 13, mask: '+39 XXX XXX XXXX' },
-  { code: '+34', names: { ru: 'Испания', en: 'Spain', de: 'Spanien', ua: 'Іспанія' }, flag: '🇪🇸', maxLength: 12, mask: '+34 XXX XXX XXX' },
-  { code: '+31', names: { ru: 'Нидерланды', en: 'Netherlands', de: 'Niederlande', ua: 'Нідерланди' }, flag: '🇳🇱', maxLength: 12, mask: '+31 X XXXX XXXX' },
-  { code: '+48', names: { ru: 'Польша', en: 'Poland', de: 'Polen', ua: 'Польща' }, flag: '🇵🇱', maxLength: 12, mask: '+48 XXX XXX XXX' },
-  { code: '+420', names: { ru: 'Чехия', en: 'Czech Republic', de: 'Tschechien', ua: 'Чехія' }, flag: '🇨🇿', maxLength: 13, mask: '+420 XXX XXX XXX' },
-  { code: '+421', names: { ru: 'Словакия', en: 'Slovakia', de: 'Slowakei', ua: 'Словаччина' }, flag: '🇸🇰', maxLength: 13, mask: '+421 XXX XXX XXX' },
-  { code: '+36', names: { ru: 'Венгрия', en: 'Hungary', de: 'Ungarn', ua: 'Угорщина' }, flag: '🇭🇺', maxLength: 12, mask: '+36 XX XXX XXXX' },
-  { code: '+40', names: { ru: 'Румыния', en: 'Romania', de: 'Rumänien', ua: 'Румунія' }, flag: '🇷🇴', maxLength: 12, mask: '+40 XXX XXX XXX' },
-  { code: '+359', names: { ru: 'Болгария', en: 'Bulgaria', de: 'Bulgarien', ua: 'Болгарія' }, flag: '🇧🇬', maxLength: 13, mask: '+359 XX XXX XXXX' },
-  { code: '+30', names: { ru: 'Греция', en: 'Greece', de: 'Griechenland', ua: 'Греція' }, flag: '🇬🇷', maxLength: 13, mask: '+30 XXX XXX XXXX' },
-  { code: '+43', names: { ru: 'Австрия', en: 'Austria', de: 'Österreich', ua: 'Австрія' }, flag: '🇦🇹', maxLength: 13, mask: '+43 XXX XXXX XXX' },
-  { code: '+41', names: { ru: 'Швейцария', en: 'Switzerland', de: 'Schweiz', ua: 'Швейцарія' }, flag: '🇨🇭', maxLength: 12, mask: '+41 XX XXX XX XX' },
-  { code: '+32', names: { ru: 'Бельгия', en: 'Belgium', de: 'Belgien', ua: 'Бельгія' }, flag: '🇧🇪', maxLength: 12, mask: '+32 XXX XX XX XX' },
-  { code: '+46', names: { ru: 'Швеция', en: 'Sweden', de: 'Schweden', ua: 'Швеція' }, flag: '🇸🇪', maxLength: 12, mask: '+46 XX XXX XX XX' },
-  { code: '+47', names: { ru: 'Норвегия', en: 'Norway', de: 'Norwegen', ua: 'Норвегія' }, flag: '🇳🇴', maxLength: 11, mask: '+47 XXX XX XXX' },
-  { code: '+45', names: { ru: 'Дания', en: 'Denmark', de: 'Dänemark', ua: 'Данія' }, flag: '🇩🇰', maxLength: 11, mask: '+45 XX XX XX XX' },
-  { code: '+358', names: { ru: 'Финляндия', en: 'Finland', de: 'Finnland', ua: 'Фінляндія' }, flag: '🇫🇮', maxLength: 12, mask: '+358 XX XXX XXXX' },
-  { code: '+354', names: { ru: 'Исландия', en: 'Iceland', de: 'Island', ua: 'Ісландія' }, flag: '🇮🇸', maxLength: 10, mask: '+354 XXX XXXX' },
-  { code: '+353', names: { ru: 'Ирландия', en: 'Ireland', de: 'Irland', ua: 'Ірландія' }, flag: '🇮🇪', maxLength: 12, mask: '+353 XX XXX XXXX' },
-  { code: '+351', names: { ru: 'Португалия', en: 'Portugal', de: 'Portugal', ua: 'Португалія' }, flag: '🇵🇹', maxLength: 12, mask: '+351 XXX XXX XXX' },
-  { code: '+352', names: { ru: 'Люксембург', en: 'Luxembourg', de: 'Luxemburg', ua: 'Люксембург' }, flag: '🇱🇺', maxLength: 11, mask: '+352 XXX XXX XXX' },
-  { code: '+386', names: { ru: 'Словения', en: 'Slovenia', de: 'Slowenien', ua: 'Словенія' }, flag: '🇸🇮', maxLength: 11, mask: '+386 XX XXX XXX' },
-  { code: '+385', names: { ru: 'Хорватия', en: 'Croatia', de: 'Kroatien', ua: 'Хорватія' }, flag: '🇭🇷', maxLength: 12, mask: '+385 XX XXX XXXX' },
-  { code: '+387', names: { ru: 'Босния и Герцеговина', en: 'Bosnia and Herzegovina', de: 'Bosnien und Herzegowina', ua: 'Боснія і Герцеговина' }, flag: '🇧🇦', maxLength: 11, mask: '+387 XX XXX XXX' },
-  { code: '+382', names: { ru: 'Черногория', en: 'Montenegro', de: 'Montenegro', ua: 'Чорногорія' }, flag: '🇲🇪', maxLength: 11, mask: '+382 XX XXX XXX' },
-  { code: '+381', names: { ru: 'Сербия', en: 'Serbia', de: 'Serbien', ua: 'Сербія' }, flag: '🇷🇸', maxLength: 12, mask: '+381 XX XXX XXXX' },
-  { code: '+383', names: { ru: 'Косово', en: 'Kosovo', de: 'Kosovo', ua: 'Косово' }, flag: '🇽🇰', maxLength: 11, mask: '+383 XX XXX XXX' },
-  { code: '+389', names: { ru: 'Северная Македония', en: 'North Macedonia', de: 'Nordmazedonien', ua: 'Північна Македонія' }, flag: '🇲🇰', maxLength: 11, mask: '+389 XX XXX XXX' },
-  { code: '+355', names: { ru: 'Албания', en: 'Albania', de: 'Albanien', ua: 'Албанія' }, flag: '🇦🇱', maxLength: 12, mask: '+355 XX XXX XXXX' },
-  { code: '+373', names: { ru: 'Молдова', en: 'Moldova', de: 'Moldau', ua: 'Молдова' }, flag: '🇲🇩', maxLength: 11, mask: '+373 XX XXX XXX' },
-  { code: '+370', names: { ru: 'Литва', en: 'Lithuania', de: 'Litauen', ua: 'Литва' }, flag: '🇱🇹', maxLength: 11, mask: '+370 XXX XX XXX' },
-  { code: '+371', names: { ru: 'Латвия', en: 'Latvia', de: 'Lettland', ua: 'Латвія' }, flag: '🇱🇻', maxLength: 11, mask: '+371 XX XXX XXX' },
-  { code: '+372', names: { ru: 'Эстония', en: 'Estonia', de: 'Estland', ua: 'Естонія' }, flag: '🇪🇪', maxLength: 11, mask: '+372 XXX XXXX' },
-  { code: '+375', names: { ru: 'Беларусь', en: 'Belarus', de: 'Belarus', ua: 'Білорусь' }, flag: '🇧🇾', maxLength: 12, mask: '+375 XX XXX XX XX' },
-  { code: '+377', names: { ru: 'Монако', en: 'Monaco', de: 'Monaco', ua: 'Монако' }, flag: '🇲🇨', maxLength: 11, mask: '+377 XX XX XX XX' },
-  { code: '+378', names: { ru: 'Сан-Марино', en: 'San Marino', de: 'San Marino', ua: 'Сан-Маріно' }, flag: '🇸🇲', maxLength: 13, mask: '+378 XXXX XXXXXX' },
-  { code: '+379', names: { ru: 'Ватикан', en: 'Vatican City', de: 'Vatikanstadt', ua: 'Ватикан' }, flag: '🇻🇦', maxLength: 13, mask: '+379 XX XXXX XXXX' },
-  { code: '+376', names: { ru: 'Андорра', en: 'Andorra', de: 'Andorra', ua: 'Андорра' }, flag: '🇦🇩', maxLength: 9, mask: '+376 XXX XXX' },
-  { code: '+423', names: { ru: 'Лихтенштейн', en: 'Liechtenstein', de: 'Liechtenstein', ua: 'Ліхтенштейн' }, flag: '🇱🇮', maxLength: 11, mask: '+423 XXX XX XX' },
-  { code: '+350', names: { ru: 'Гибралтар', en: 'Gibraltar', de: 'Gibraltar', ua: 'Гібралтар' }, flag: '🇬🇮', maxLength: 11, mask: '+350 XXX XXXXX' },
-  { code: '+298', names: { ru: 'Фарерские острова', en: 'Faroe Islands', de: 'Färöer-Inseln', ua: 'Фарерські острови' }, flag: '🇫🇴', maxLength: 9, mask: '+298 XX XX XX' },
+  // { code: '+33', names: { ru: 'Франция', en: 'France', de: 'Frankreich', ua: 'Франція' }, flag: '🇫🇷', maxLength: 12, mask: '+33 X XX XX XX XX' },
+  // { code: '+39', names: { ru: 'Италия', en: 'Italy', de: 'Italien', ua: 'Італія' }, flag: '🇮🇹', maxLength: 13, mask: '+39 XXX XXX XXXX' },
+  // { code: '+34', names: { ru: 'Испания', en: 'Spain', de: 'Spanien', ua: 'Іспанія' }, flag: '🇪🇸', maxLength: 12, mask: '+34 XXX XXX XXX' },
+  // { code: '+31', names: { ru: 'Нидерланды', en: 'Netherlands', de: 'Niederlande', ua: 'Нідерланди' }, flag: '🇳🇱', maxLength: 12, mask: '+31 X XXXX XXXX' },
+  // { code: '+48', names: { ru: 'Польша', en: 'Poland', de: 'Polen', ua: 'Польща' }, flag: '🇵🇱', maxLength: 12, mask: '+48 XXX XXX XXX' },
+  // { code: '+420', names: { ru: 'Чехия', en: 'Czech Republic', de: 'Tschechien', ua: 'Чехія' }, flag: '🇨🇿', maxLength: 13, mask: '+420 XXX XXX XXX' },
+  // { code: '+421', names: { ru: 'Словакия', en: 'Slovakia', de: 'Slowakei', ua: 'Словаччина' }, flag: '🇸🇰', maxLength: 13, mask: '+421 XXX XXX XXX' },
+  // { code: '+36', names: { ru: 'Венгрия', en: 'Hungary', de: 'Ungarn', ua: 'Угорщина' }, flag: '🇭🇺', maxLength: 12, mask: '+36 XX XXX XXXX' },
+  // { code: '+40', names: { ru: 'Румыния', en: 'Romania', de: 'Rumänien', ua: 'Румунія' }, flag: '🇷🇴', maxLength: 12, mask: '+40 XXX XXX XXX' },
+  // { code: '+359', names: { ru: 'Болгария', en: 'Bulgaria', de: 'Bulgarien', ua: 'Болгарія' }, flag: '🇧🇬', maxLength: 13, mask: '+359 XX XXX XXXX' },
+  // { code: '+30', names: { ru: 'Греция', en: 'Greece', de: 'Griechenland', ua: 'Греція' }, flag: '🇬🇷', maxLength: 13, mask: '+30 XXX XXX XXXX' },
+  // { code: '+43', names: { ru: 'Австрия', en: 'Austria', de: 'Österreich', ua: 'Австрія' }, flag: '🇦🇹', maxLength: 13, mask: '+43 XXX XXXX XXX' },
+  // { code: '+41', names: { ru: 'Швейцария', en: 'Switzerland', de: 'Schweiz', ua: 'Швейцарія' }, flag: '🇨🇭', maxLength: 12, mask: '+41 XX XXX XX XX' },
+  // { code: '+32', names: { ru: 'Бельгия', en: 'Belgium', de: 'Belgien', ua: 'Бельгія' }, flag: '🇧🇪', maxLength: 12, mask: '+32 XXX XX XX XX' },
+  // { code: '+46', names: { ru: 'Швеция', en: 'Sweden', de: 'Schweden', ua: 'Швеція' }, flag: '🇸🇪', maxLength: 12, mask: '+46 XX XXX XX XX' },
+  // { code: '+47', names: { ru: 'Норвегия', en: 'Norway', de: 'Norwegen', ua: 'Норвегія' }, flag: '🇳🇴', maxLength: 11, mask: '+47 XXX XX XXX' },
+  // { code: '+45', names: { ru: 'Дания', en: 'Denmark', de: 'Dänemark', ua: 'Данія' }, flag: '🇩🇰', maxLength: 11, mask: '+45 XX XX XX XX' },
+  // { code: '+358', names: { ru: 'Финляндия', en: 'Finland', de: 'Finnland', ua: 'Фінляндія' }, flag: '🇫🇮', maxLength: 12, mask: '+358 XX XXX XXXX' },
+  // { code: '+354', names: { ru: 'Исландия', en: 'Iceland', de: 'Island', ua: 'Ісландія' }, flag: '🇮🇸', maxLength: 10, mask: '+354 XXX XXXX' },
+  // { code: '+353', names: { ru: 'Ирландия', en: 'Ireland', de: 'Irland', ua: 'Ірландія' }, flag: '🇮🇪', maxLength: 12, mask: '+353 XX XXX XXXX' },
+  // { code: '+351', names: { ru: 'Португалия', en: 'Portugal', de: 'Portugal', ua: 'Португалія' }, flag: '🇵🇹', maxLength: 12, mask: '+351 XXX XXX XXX' },
+  // { code: '+352', names: { ru: 'Люксембург', en: 'Luxembourg', de: 'Luxemburg', ua: 'Люксембург' }, flag: '🇱🇺', maxLength: 11, mask: '+352 XXX XXX XXX' },
+  // { code: '+386', names: { ru: 'Словения', en: 'Slovenia', de: 'Slowenien', ua: 'Словенія' }, flag: '🇸🇮', maxLength: 11, mask: '+386 XX XXX XXX' },
+  // { code: '+385', names: { ru: 'Хорватия', en: 'Croatia', de: 'Kroatien', ua: 'Хорватія' }, flag: '🇭🇷', maxLength: 12, mask: '+385 XX XXX XXXX' },
+  // { code: '+387', names: { ru: 'Босния и Герцеговина', en: 'Bosnia and Herzegovina', de: 'Bosnien und Herzegowina', ua: 'Боснія і Герцеговина' }, flag: '🇧🇦', maxLength: 11, mask: '+387 XX XXX XXX' },
+  // { code: '+382', names: { ru: 'Черногория', en: 'Montenegro', de: 'Montenegro', ua: 'Чорногорія' }, flag: '🇲🇪', maxLength: 11, mask: '+382 XX XXX XXX' },
+  // { code: '+381', names: { ru: 'Сербия', en: 'Serbia', de: 'Serbien', ua: 'Сербія' }, flag: '🇷🇸', maxLength: 12, mask: '+381 XX XXX XXXX' },
+  // { code: '+383', names: { ru: 'Косово', en: 'Kosovo', de: 'Kosovo', ua: 'Косово' }, flag: '🇽🇰', maxLength: 11, mask: '+383 XX XXX XXX' },
+  // { code: '+389', names: { ru: 'Северная Македония', en: 'North Macedonia', de: 'Nordmazedonien', ua: 'Північна Македонія' }, flag: '🇲🇰', maxLength: 11, mask: '+389 XX XXX XXX' },
+  // { code: '+355', names: { ru: 'Албания', en: 'Albania', de: 'Albanien', ua: 'Албанія' }, flag: '🇦🇱', maxLength: 12, mask: '+355 XX XXX XXXX' },
+  // { code: '+373', names: { ru: 'Молдова', en: 'Moldova', de: 'Moldau', ua: 'Молдова' }, flag: '🇲🇩', maxLength: 11, mask: '+373 XX XXX XXX' },
+  // { code: '+370', names: { ru: 'Литва', en: 'Lithuania', de: 'Litauen', ua: 'Литва' }, flag: '🇱🇹', maxLength: 11, mask: '+370 XXX XX XXX' },
+  // { code: '+371', names: { ru: 'Латвия', en: 'Latvia', de: 'Lettland', ua: 'Латвія' }, flag: '🇱🇻', maxLength: 11, mask: '+371 XX XXX XXX' },
+  // { code: '+372', names: { ru: 'Эстония', en: 'Estonia', de: 'Estland', ua: 'Естонія' }, flag: '🇪🇪', maxLength: 11, mask: '+372 XXX XXXX' },
+  // { code: '+375', names: { ru: 'Беларусь', en: 'Belarus', de: 'Belarus', ua: 'Білорусь' }, flag: '🇧🇾', maxLength: 12, mask: '+375 XX XXX XX XX' },
+  // { code: '+377', names: { ru: 'Монако', en: 'Monaco', de: 'Monaco', ua: 'Монако' }, flag: '🇲🇨', maxLength: 11, mask: '+377 XX XX XX XX' },
+  // { code: '+378', names: { ru: 'Сан-Марино', en: 'San Marino', de: 'San Marino', ua: 'Сан-Маріно' }, flag: '🇸🇲', maxLength: 13, mask: '+378 XXXX XXXXXX' },
+  // { code: '+379', names: { ru: 'Ватикан', en: 'Vatican City', de: 'Vatikanstadt', ua: 'Ватикан' }, flag: '🇻🇦', maxLength: 13, mask: '+379 XX XXXX XXXX' },
+  // { code: '+376', names: { ru: 'Андорра', en: 'Andorra', de: 'Andorra', ua: 'Андорра' }, flag: '🇦🇩', maxLength: 9, mask: '+376 XXX XXX' },
+  // { code: '+423', names: { ru: 'Лихтенштейн', en: 'Liechtenstein', de: 'Liechtenstein', ua: 'Ліхтенштейн' }, flag: '🇱🇮', maxLength: 11, mask: '+423 XXX XX XX' },
+  // { code: '+350', names: { ru: 'Гибралтар', en: 'Gibraltar', de: 'Gibraltar', ua: 'Гібралтар' }, flag: '🇬🇮', maxLength: 11, mask: '+350 XXX XXXXX' },
+  // { code: '+298', names: { ru: 'Фарерские острова', en: 'Faroe Islands', de: 'Färöer-Inseln', ua: 'Фарерські острови' }, flag: '🇫🇴', maxLength: 9, mask: '+298 XX XX XX' },
   
-  // Турция (на границе Европы и Азии)
-  { code: '+90', names: { ru: 'Турция', en: 'Turkey', de: 'Türkei', ua: 'Туреччина' }, flag: '🇹🇷', maxLength: 13, mask: '+90 XXX XXX XXXX' },
+  // // Турция (на границе Европы и Азии)
+  // { code: '+90', names: { ru: 'Турция', en: 'Turkey', de: 'Türkei', ua: 'Туреччина' }, flag: '🇹🇷', maxLength: 13, mask: '+90 XXX XXX XXXX' },
   
-  // Другие популярные страны
-  { code: '+1', names: { ru: 'США/Канада', en: 'United States/Canada', de: 'USA/Kanada', ua: 'США/Канада' }, flag: '🇺🇸', maxLength: 12, mask: '+1 XXX XXX XXXX' },
-  { code: '+86', names: { ru: 'Китай', en: 'China', de: 'China', ua: 'Китай' }, flag: '🇨🇳', maxLength: 14, mask: '+86 XXX XXXX XXXX' },
-  { code: '+81', names: { ru: 'Япония', en: 'Japan', de: 'Japan', ua: 'Японія' }, flag: '🇯🇵', maxLength: 13, mask: '+81 XX XXXX XXXX' },
-  { code: '+82', names: { ru: 'Южная Корея', en: 'South Korea', de: 'Südkorea', ua: 'Південна Корея' }, flag: '🇰🇷', maxLength: 13, mask: '+82 XX XXXX XXXX' },
-  { code: '+91', names: { ru: 'Индия', en: 'India', de: 'Indien', ua: 'Індія' }, flag: '🇮🇳', maxLength: 13, mask: '+91 XXXXX XXXXX' },
-  { code: '+55', names: { ru: 'Бразилия', en: 'Brazil', de: 'Brasilien', ua: 'Бразилія' }, flag: '🇧🇷', maxLength: 14, mask: '+55 XX XXXXX XXXX' },
-  { code: '+52', names: { ru: 'Мексика', en: 'Mexico', de: 'Mexiko', ua: 'Мексика' }, flag: '🇲🇽', maxLength: 13, mask: '+52 XXX XXX XXXX' },
-  { code: '+61', names: { ru: 'Австралия', en: 'Australia', de: 'Australien', ua: 'Австралія' }, flag: '🇦🇺', maxLength: 12, mask: '+61 XXX XXX XXX' },
-  { code: '+64', names: { ru: 'Новая Зеландия', en: 'New Zealand', de: 'Neuseeland', ua: 'Нова Зеландія' }, flag: '🇳🇿', maxLength: 12, mask: '+64 XX XXX XXXX' },
-  { code: '+27', names: { ru: 'ЮАР', en: 'South Africa', de: 'Südafrika', ua: 'ПАР' }, flag: '🇿🇦', maxLength: 12, mask: '+27 XX XXX XXXX' },
-  { code: '+20', names: { ru: 'Египет', en: 'Egypt', de: 'Ägypten', ua: 'Єгипет' }, flag: '🇪🇬', maxLength: 13, mask: '+20 XXX XXX XXXX' },
-  { code: '+971', names: { ru: 'ОАЭ', en: 'UAE', de: 'VAE', ua: 'ОАЕ' }, flag: '🇦🇪', maxLength: 13, mask: '+971 XX XXX XXXX' },
-  { code: '+966', names: { ru: 'Саудовская Аравия', en: 'Saudi Arabia', de: 'Saudi-Arabien', ua: 'Саудівська Аравія' }, flag: '🇸🇦', maxLength: 13, mask: '+966 XX XXX XXXX' },
-  { code: '+972', names: { ru: 'Израиль', en: 'Israel', de: 'Israel', ua: 'Ізраїль' }, flag: '🇮🇱', maxLength: 12, mask: '+972 XX XXX XXXX' }
+  // // Другие популярные страны
+  // { code: '+1', names: { ru: 'США/Канада', en: 'United States/Canada', de: 'USA/Kanada', ua: 'США/Канада' }, flag: '🇺🇸', maxLength: 12, mask: '+1 XXX XXX XXXX' },
+  // { code: '+86', names: { ru: 'Китай', en: 'China', de: 'China', ua: 'Китай' }, flag: '🇨🇳', maxLength: 14, mask: '+86 XXX XXXX XXXX' },
+  // { code: '+81', names: { ru: 'Япония', en: 'Japan', de: 'Japan', ua: 'Японія' }, flag: '🇯🇵', maxLength: 13, mask: '+81 XX XXXX XXXX' },
+  // { code: '+82', names: { ru: 'Южная Корея', en: 'South Korea', de: 'Südkorea', ua: 'Південна Корея' }, flag: '🇰🇷', maxLength: 13, mask: '+82 XX XXXX XXXX' },
+  // { code: '+91', names: { ru: 'Индия', en: 'India', de: 'Indien', ua: 'Індія' }, flag: '🇮🇳', maxLength: 13, mask: '+91 XXXXX XXXXX' },
+  // { code: '+55', names: { ru: 'Бразилия', en: 'Brazil', de: 'Brasilien', ua: 'Бразилія' }, flag: '🇧🇷', maxLength: 14, mask: '+55 XX XXXXX XXXX' },
+  // { code: '+52', names: { ru: 'Мексика', en: 'Mexico', de: 'Mexiko', ua: 'Мексика' }, flag: '🇲🇽', maxLength: 13, mask: '+52 XXX XXX XXXX' },
+  // { code: '+61', names: { ru: 'Австралия', en: 'Australia', de: 'Australien', ua: 'Австралія' }, flag: '🇦🇺', maxLength: 12, mask: '+61 XXX XXX XXX' },
+  // { code: '+64', names: { ru: 'Новая Зеландия', en: 'New Zealand', de: 'Neuseeland', ua: 'Нова Зеландія' }, flag: '🇳🇿', maxLength: 12, mask: '+64 XX XXX XXXX' },
+  // { code: '+27', names: { ru: 'ЮАР', en: 'South Africa', de: 'Südafrika', ua: 'ПАР' }, flag: '🇿🇦', maxLength: 12, mask: '+27 XX XXX XXXX' },
+  // { code: '+20', names: { ru: 'Египет', en: 'Egypt', de: 'Ägypten', ua: 'Єгипет' }, flag: '🇪🇬', maxLength: 13, mask: '+20 XXX XXX XXXX' },
+  // { code: '+971', names: { ru: 'ОАЭ', en: 'UAE', de: 'VAE', ua: 'ОАЕ' }, flag: '🇦🇪', maxLength: 13, mask: '+971 XX XXX XXXX' },
+  // { code: '+966', names: { ru: 'Саудовская Аравия', en: 'Saudi Arabia', de: 'Saudi-Arabien', ua: 'Саудівська Аравія' }, flag: '🇸🇦', maxLength: 13, mask: '+966 XX XXX XXXX' },
+  // { code: '+972', names: { ru: 'Израиль', en: 'Israel', de: 'Israel', ua: 'Ізраїль' }, flag: '🇮🇱', maxLength: 12, mask: '+972 XX XXX XXXX' }
 ]
 
 // Вычисляемые свойства
@@ -375,41 +374,20 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* Стили для селектора кода страны */
-.phone-input-wrapper {
+/* .phone-input-wrapper {
   display: flex;
   gap: 0;
   width: 100%;
 }
 
 .country-selector {
-  position: relative;
-  flex-shrink: 0;
-  border: 1px solid #ddd;
-  border-right: none;
-  border-radius: 8px 0 0 8px;
-  background: #fff;
-  z-index: 10;
+  position: absolute;
 }
 
-.country-selector.active {
-  border-color: rgb(62, 176, 212);
-  z-index: 20;
-}
 
 .country-selector-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 10px;
-  cursor: pointer;
-  min-width: 80px;
-  user-select: none;
-  transition: all 0.3s ease;
 }
 
-.country-selector-head:hover {
-  background-color: #f8f9fa;
-}
 
 .country-flag {
   font-size: 16px;
@@ -460,7 +438,7 @@ onBeforeUnmount(() => {
   transform: translateY(0);
 }
 
-/* Стили для поиска стран */
+
 .country-search {
   position: relative;
   padding: 8px 12px;
@@ -565,70 +543,13 @@ onBeforeUnmount(() => {
 .country-item .sprite-svg-fill {
   flex-shrink: 0;
   color: rgb(62, 176, 212);
+} */
+
+
+.country-selector{
+  position: absolute;
+  top: 100%;
+  background: gray;
 }
 
-/* Адаптация поля ввода для работы с селектором */
-.phone-input-wrapper input[type="tel"] {
-  border-radius: 0 8px 8px 0;
-  border-left: none;
-  flex: 1;
-}
-
-.phone-input-wrapper input[type="tel"]:focus {
-  border-left: 1px solid rgb(62, 176, 212);
-}
-
-/* Медиа-запросы для мобильных устройств */
-@media (max-width: 768px) {
-  .country-selector-head {
-    padding: 10px 8px;
-    min-width: 70px;
-  }
-  
-  .country-flag {
-    font-size: 14px;
-  }
-  
-  .country-code {
-    font-size: 12px;
-  }
-  
-  .country-selector-body {
-    max-height: 150px;
-    min-width: 260px;
-  }
-  
-  .country-search {
-    padding: 6px 10px;
-  }
-  
-  .country-search-input {
-    padding: 6px 30px 6px 10px;
-    font-size: 13px;
-  }
-  
-  .search-icon, .clear-search-icon {
-    right: 18px;
-    width: 14px;
-    height: 14px;
-  }
-  
-  .country-list {
-    max-height: 120px;
-  }
-  
-  .country-item {
-    padding: 10px 14px;
-  }
-  
-  .country-item .country-name {
-    font-size: 13px;
-    min-width: 120px;
-  }
-  
-  .country-item .country-code {
-    font-size: 12px;
-    min-width: 45px;
-  }
-}
 </style>
