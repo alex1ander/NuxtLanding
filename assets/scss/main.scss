@@ -442,6 +442,9 @@ $sizeCirlce: 5px;
         width: fit-content;
         &:hover{
             color: rgb(255, 189, 46)!important;
+            span{
+                color: rgb(255, 189, 46)!important;
+            }
         }
     }
 }
