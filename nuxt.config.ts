@@ -4,7 +4,10 @@ export default defineNuxtConfig({
   pages: true,
 
   // Глобальные стили подключаются здесь
-  css: ['@/assets/scss/main.scss',],
+  css: [
+    '@/assets/scss/main.scss',
+    'flag-icons/css/flag-icons.min.css'
+  ],
 
   app: {
     head: {

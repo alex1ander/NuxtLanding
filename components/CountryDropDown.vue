@@ -2,11 +2,12 @@
   <div class="dropdown-list" ref="dropdown" :class="{ active: isDropdownActive }">
     <div class="dropdown-head text-with-svg" @click="toggleDropdown">
       <span class="country-flag">{{ currentCountry.flag }}</span>
-<svg width="12" height="12" class="dropdown-arrow" viewBox="0 0 12 12">
-  <path d="M4 2 L8 6 L4 10 Z" />
-</svg>
+      <span class="fi fi-am"></span>
+      <svg width="12" height="12" class="dropdown-arrow" viewBox="0 0 12 12">
+        <path d="M4 2 L8 6 L4 10 Z" />
+      </svg>
 
-      
+    
     </div>
     <div class="dropdown-body" @click.stop @wheel.stop>
       
