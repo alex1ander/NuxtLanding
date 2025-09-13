@@ -2,16 +2,18 @@
   <div class="dropdown-list" ref="dropdown" :class="{ active: isDropdownActive }">
     <div class="dropdown-head text-with-svg" @click="toggleDropdown">
       <span class="country-flag">{{ currentCountry.flag }}</span>
-      <svg width="12" height="12" class="dropdown-arrow">
-        <path d="M6 8L2 4h8z" />
-      </svg>
+<svg width="12" height="12" class="dropdown-arrow" viewBox="0 0 12 12">
+  <path d="M4 2 L8 6 L4 10 Z" />
+</svg>
+
+      
     </div>
-    <div class="dropdown-body" @click.stop>
+    <div class="dropdown-body" @click.stop @wheel.stop>
       
       <!-- Список стран -->
-      <ul class="selected-list">
+      <ul class="selected-list" @wheel.stop>
 
-        <li  class="cursor-hover country-item">
+        <li  class="cursor-hover country-search-list">
           <!-- Поле поиска -->
           <div class="country-search">
             <input
@@ -38,7 +40,7 @@
           :key="country.code"
           :class="{ active: country.code === selectedCountryCode }"
           @click.stop="selectCountry(country)"
-          class="cursor-hover country-item"
+          class="cursor-hover"
         >
           <span class="country-flag">{{ country.flag }}</span>
           <span class="country-name">{{ country.name }}</span>
@@ -216,12 +218,22 @@ function onClickOutside(event: MouseEvent) {
   }
 }
 
+function onWheel(event: WheelEvent) {
+  // Предотвращаем скролл страницы, когда скроллим внутри дропдауна
+  if (isDropdownActive.value && dropdown.value && dropdown.value.contains(event.target as Node)) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+}
+
 onMounted(() => {
   document.addEventListener('click', onClickOutside)
+  document.addEventListener('wheel', onWheel, { passive: false })
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onClickOutside)
+  document.removeEventListener('wheel', onWheel)
 })
 </script>
 
@@ -236,6 +248,11 @@ onBeforeUnmount(() => {
     }
   }
 
+  .country-search-list{
+    position: sticky;
+    top:0;    
+  }
+
   .selected-list{
     max-height: 350px;
     overflow-y: scroll;
@@ -247,6 +264,7 @@ onBeforeUnmount(() => {
 
     .country-search-input{
       padding: 6px 12px;
+      font-size: 14px;
     }
 
     .search-icon,.clear-search-icon{

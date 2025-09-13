@@ -27,7 +27,7 @@
 }
 
 body{
-    background: rgba(45, 45, 45, 0.95);
+    background: rgb(45, 45, 45);
 }
 
 main{
@@ -437,6 +437,9 @@ $sizeCirlce: 5px;
         svg{
             fill:rgb(255, 189, 46);
         }
+        span{
+            color: rgb(255, 189, 46)!important;
+        }
     }
     li{
         width: fit-content;
@@ -764,4 +767,19 @@ $sizeCirlce: 5px;
             }
         }
     }
+}
+
+
+*::-webkit-scrollbar
+{
+	width: 8px;
+    background: rgba(45, 45, 45, 0);
+}
+
+*::-webkit-scrollbar-thumb
+{
+    border-radius: 8px;
+    background-clip: padding-box;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background: linear-gradient(45deg, rgb(62, 176, 212) 0%, rgb(150, 99, 200) 100%) !important;
 }
